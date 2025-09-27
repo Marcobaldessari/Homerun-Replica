@@ -113,6 +113,5 @@ export const CreditCardForm: React.FC<CreditCardFormProps> = ({
             veriyorum.
           </label>
         </div>
-      </form>
     </div>;
 };
