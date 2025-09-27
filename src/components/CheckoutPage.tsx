@@ -15,7 +15,7 @@ export function CheckoutPage() {
       console.log('Form submitted:', data);
     }, 2000);
   };
-  return <div className="bg-white w-full max-h-screen flex flex-col relative">
+  return <div className="bg-white w-full h-screen flex flex-col relative">
       {/* Status Bar */}
       <div className="h-11 px-5 flex justify-between items-center">
         <div className="text-[#0e0f11] text-[15px] font-semibold">9:27</div>
@@ -62,20 +62,20 @@ export function CheckoutPage() {
         </div>
       </div>
       {/* Credit Card Form Section */}
-      <div className="px-6 pt-6 pb-0">
+      <div className="px-6 pt-6 pb-0 flex-1 overflow-y-auto">
         <h2 className="text-[#0e0f11] text-xl font-semibold mb-2">
           Credit Card information
         </h2>
-      </div>
-      <div className="px-0 mb-0">
-        <CreditCardForm onSubmit={handleSubmit} />
-      </div>
-      {/* Payment Info Section */}
-      <div className="px-6 mb-6">
-        <PaymentInfoCard title="Why is a credit card necessary?" description="We receive your payment and transfer it to the service provider's account when the reservation is completed. If the service is not completed, we refund your payment to your card." />
+        <div className="px-0 mb-0">
+          <CreditCardForm onSubmit={handleSubmit} />
+        </div>
+        {/* Payment Info Section */}
+        <div className="px-6 mb-6">
+          <PaymentInfoCard title="Why is a credit card necessary?" description="We receive your payment and transfer it to the service provider's account when the reservation is completed. If the service is not completed, we refund your payment to your card." />
+        </div>
       </div>
       {/* Footer with Terms and Button */}
-      <div className="mt-0">
+      <div className="mt-0 sticky bottom-0 bg-white border-t border-gray-100">
         <div className="border-t border-[#e3e5e8] pt-0 pb-0 px-6 flex flex-col gap-0">
           <ConsentAgreement content={{
           prefix: 'By continuing, I accept the ',
