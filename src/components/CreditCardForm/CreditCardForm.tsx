@@ -75,7 +75,7 @@ export const CreditCardForm: React.FC<CreditCardFormProps> = ({
     e.preventDefault();
     onSubmit?.(formData);
   };
-  return <div className={`w-full max-w-lg bg-white p-6 space-y-4 ${className}`} data-id={dataId}>
+  return <div className={`w-full max-w-lg bg-white py-6 space-y-4 ${className}`} data-id={dataId}>
         {/* Card Number */}
         <div className="space-y-1">
           <label htmlFor="cardNumber" className="block text-sm font-semibold text-gray-900">
