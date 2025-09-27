@@ -66,7 +66,7 @@ export function CheckoutPage() {
         <h2 className="text-[#0e0f11] text-xl font-semibold mb-2">
           Credit Card information
         </h2>
-        <div className="px-0 mb-0">
+        <div className="mb-0">
           <CreditCardForm onSubmit={handleSubmit} />
         </div>
         {/* Payment Info Section */}
