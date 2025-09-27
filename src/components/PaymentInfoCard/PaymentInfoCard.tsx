@@ -14,7 +14,7 @@ export function PaymentInfoCard({
   className = '',
   'data-id': dataId
 }: PaymentInfoCardProps) {
-  return <div data-id={dataId} className={`bg-gray-50 rounded-lg mx-6 space-y-3 p-6 font-figtree ${className}`}>
+  return <div data-id={dataId} className={`bg-gray-50 rounded-lg mx-6 space-y-3 font-figtree ${className}`}>
       <div className="flex flex-col">
         <h3 className="text-sm font-semibold text-gray-900 leading-6">
           {title}
