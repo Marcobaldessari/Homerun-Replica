@@ -70,12 +70,10 @@ export function CheckoutPage() {
           <CreditCardForm onSubmit={handleSubmit} />
         </div>
         {/* Payment Info Section */}
-        <div className="px-6 mb-6">
-          <PaymentInfoCard title="Why is a credit card necessary?" description="We receive your payment and transfer it to the service provider's account when the reservation is completed. If the service is not completed, we refund your payment to your card." />
-        </div>
+        <PaymentInfoCard title="Why is a credit card necessary?" description="We receive your payment and transfer it to the service provider's account when the reservation is completed. If the service is not completed, we refund your payment to your card." />
       </div>
       {/* Footer with Terms and Button */}
-      <div className="mt-0 sticky bottom-0 bg-white border-t border-gray-100">
+      <div className="mt-0 bg-white">
         <div className="border-t border-[#e3e5e8] pt-0 pb-0 px-6 flex flex-col gap-0">
           <ConsentAgreement content={{
           prefix: 'By continuing, I accept the ',
