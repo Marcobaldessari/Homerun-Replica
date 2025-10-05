@@ -1,5 +1,5 @@
 {
-  "name": "magic-patterns-vite-template",
+  "name": "olympus-ui-request-creation",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -31,3 +31,4 @@
     "postcss": "latest"
   }
 }
+
