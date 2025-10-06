@@ -109,7 +109,7 @@ export const RadioButtonScreen: React.FC<RadioButtonScreenProps> = ({
       <SeasonalityBanner />
 
       {/* Form Content */}
-      <div className="flex flex-col flex-grow">
+      <div className="flex flex-col flex-grow pb-24">
         <div className="px-6 pt-6 pb-4">
           <h2 className="text-xl font-semibold text-[#0e0f11] leading-7">
             How many square meters of room/house will be painted?

@@ -171,7 +171,7 @@ export const TextFieldScreen: React.FC<TextFieldScreenProps> = ({
         {/* Seasonality Banner */}
         <SeasonalityBanner />
 
-        <form onSubmit={handleSubmit} className="flex flex-col flex-grow">
+        <form onSubmit={handleSubmit} className="flex flex-col flex-grow pb-24">
           <div className="px-6 pt-6 pb-4">
             <h1 className="text-xl font-semibold text-[#0e0f11] leading-7">
               What else should the painter know/pay attention to?
@@ -189,9 +189,9 @@ export const TextFieldScreen: React.FC<TextFieldScreenProps> = ({
           <div className="px-6 pt-4">
             <ExamplesSection />
           </div>
-
-          <CTA onClick={() => handleSubmit({} as React.FormEvent)}>Next</CTA>
         </form>
+
+        <CTA onClick={() => handleSubmit({} as React.FormEvent)}>Next</CTA>
       </div>
 
       {/* Home indicator */}

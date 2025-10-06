@@ -178,7 +178,7 @@ export const CheckboxScreen: React.FC<CheckboxScreenProps> = ({
 
       {/* Progress Bar */}
       <div className="flex justify-center py-1 bg-white">
-        <ProgressBar value={60} />
+        <ProgressBar value={60} max={100} />
       </div>
 
       {/* Price Range */}
@@ -190,7 +190,7 @@ export const CheckboxScreen: React.FC<CheckboxScreenProps> = ({
       <SeasonalityBanner />
 
       {/* Main Content */}
-      <main className="flex-1 overflow-auto">
+      <main className="flex-1 overflow-auto pb-24">
         {/* Question */}
         <div className="px-6 pt-6 pb-4">
           <h2 className="text-xl font-semibold text-[#0e0f11]">

@@ -12,7 +12,7 @@ export const CTA: React.FC<CTAProps> = ({
   className = "",
 }) => {
   return (
-    <div className="mt-auto border-t border-[#e3e5e8] p-6">
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#e3e5e8] p-6 z-10">
       <button
         type="button"
         onClick={onClick}
@@ -23,4 +23,3 @@ export const CTA: React.FC<CTAProps> = ({
     </div>
   );
 };
-
