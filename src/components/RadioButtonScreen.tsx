@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StatusBar } from "./StatusBar";
-import { Header } from "./Header";
+import { Header } from "./FormHeader";
 import { ProgressBar } from "./ProgressBar";
 import { PriceRange } from "./PriceRange";
 import { CTA } from "./CTA";

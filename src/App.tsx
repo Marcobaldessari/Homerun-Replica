@@ -1,41 +1,23 @@
 import React, { useState } from "react";
 import { NavigationApp, ScreenType } from "./components/NavigationApp";
+import { FloatingNavigation } from "./components/FloatingNavigation";
 
 function App() {
-  const [currentScreen, setCurrentScreen] = useState<ScreenType>("radio");
-
-  const screenNames = {
-    radio: "Radio Buttons (Step 1)",
-    checkbox: "Checkboxes (Step 2)",
-    text: "Text Field (Step 3)",
-  };
+  const [currentScreen, setCurrentScreen] = useState<ScreenType>("homepage");
 
   return (
     <div className="App">
-      {/* Navigation Controls for Testing */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 p-2 flex justify-center space-x-2">
-        {(["radio", "checkbox", "text"] as ScreenType[]).map((screen) => (
-          <button
-            key={screen}
-            onClick={() => setCurrentScreen(screen)}
-            className={`px-3 py-1 text-xs rounded ${
-              currentScreen === screen
-                ? "bg-blue-500 text-white"
-                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-            }`}
-          >
-            {screenNames[screen]}
-          </button>
-        ))}
-      </div>
+      {/* Floating Navigation */}
+      <FloatingNavigation
+        currentScreen={currentScreen}
+        onScreenChange={setCurrentScreen}
+      />
 
       {/* Main App Content */}
-      <div className="pt-12">
-        <NavigationApp
-          currentScreen={currentScreen}
-          onScreenChange={setCurrentScreen}
-        />
-      </div>
+      <NavigationApp
+        currentScreen={currentScreen}
+        onScreenChange={setCurrentScreen}
+      />
     </div>
   );
 }

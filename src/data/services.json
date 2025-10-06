@@ -1,0 +1,220 @@
+{
+  "serviceCategories": [
+    {
+      "id": "home-cleaning",
+      "name": "Home Cleaning",
+      "services": [
+        {
+          "id": "deep-cleaning",
+          "name": "Deep Cleaning",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "regular-cleaning",
+          "name": "Regular Cleaning",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "window-cleaning",
+          "name": "Window Cleaning",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "carpet-cleaning",
+          "name": "Carpet Cleaning",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "move-in-out",
+          "name": "Move-in/Move-out",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "office-cleaning",
+          "name": "Office Cleaning",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        }
+      ]
+    },
+    {
+      "id": "home-renovation",
+      "name": "Home Renovation",
+      "services": [
+        {
+          "id": "kitchen-renovation",
+          "name": "Kitchen Renovation",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "bathroom-renovation",
+          "name": "Bathroom Renovation",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "flooring",
+          "name": "Flooring",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "painting",
+          "name": "Painting",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "roofing",
+          "name": "Roofing",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "electrical-work",
+          "name": "Electrical Work",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        }
+      ]
+    },
+    {
+      "id": "plumbing-services",
+      "name": "Plumbing Services",
+      "services": [
+        {
+          "id": "pipe-repair",
+          "name": "Pipe Repair",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "drain-cleaning",
+          "name": "Drain Cleaning",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "faucet-installation",
+          "name": "Faucet Installation",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "toilet-repair",
+          "name": "Toilet Repair",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "water-heater",
+          "name": "Water Heater",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "emergency-plumbing",
+          "name": "Emergency Plumbing",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        }
+      ]
+    },
+    {
+      "id": "electrical-services",
+      "name": "Electrical Services",
+      "services": [
+        {
+          "id": "outlet-installation",
+          "name": "Outlet Installation",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "light-fixture",
+          "name": "Light Fixture",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "circuit-breaker",
+          "name": "Circuit Breaker",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "wiring",
+          "name": "Wiring",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "smart-home",
+          "name": "Smart Home",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "electrical-inspection",
+          "name": "Electrical Inspection",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        }
+      ]
+    },
+    {
+      "id": "garden-outdoor",
+      "name": "Garden & Outdoor",
+      "services": [
+        {
+          "id": "lawn-care",
+          "name": "Lawn Care",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "tree-trimming",
+          "name": "Tree Trimming",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "garden-design",
+          "name": "Garden Design",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "fence-installation",
+          "name": "Fence Installation",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "deck-building",
+          "name": "Deck Building",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "outdoor-lighting",
+          "name": "Outdoor Lighting",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        }
+      ]
+    },
+    {
+      "id": "moving-services",
+      "name": "Moving Services",
+      "services": [
+        {
+          "id": "local-moving",
+          "name": "Local Moving",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "long-distance",
+          "name": "Long Distance",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "packing-services",
+          "name": "Packing Services",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "storage",
+          "name": "Storage",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "furniture-assembly",
+          "name": "Furniture Assembly",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        },
+        {
+          "id": "moving-supplies",
+          "name": "Moving Supplies",
+          "image": "/1b122e519b76170504d325b7f9c23264a2d2b015.png"
+        }
+      ]
+    }
+  ]
+}

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { Homepage } from "./Homepage";
+import { SearchPage } from "./SearchPage";
 import { RadioButtonScreen } from "./RadioButtonScreen";
 import { CheckboxScreen } from "./CheckboxScreen";
 import { TextFieldScreen } from "./TextFieldScreen";
 
-export type ScreenType = "radio" | "checkbox" | "text";
+export type ScreenType = "homepage" | "search" | "radio" | "checkbox" | "text";
 
 interface NavigationAppProps {
   currentScreen: ScreenType;
@@ -16,13 +18,19 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
 }) => {
   const handleBack = () => {
     switch (currentScreen) {
+      case "search":
+        onScreenChange("homepage");
+        break;
+      case "radio":
+        onScreenChange("search");
+        break;
       case "checkbox":
         onScreenChange("radio");
         break;
       case "text":
         onScreenChange("checkbox");
         break;
-      case "radio":
+      case "homepage":
       default:
         // Stay on first screen or handle exit
         console.log("Already on first screen");
@@ -30,8 +38,34 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
     }
   };
 
+  const handleServiceSelect = (serviceName: string) => {
+    console.log(
+      `NavigationApp: Selected service: ${serviceName}, changing to radio screen`
+    );
+    onScreenChange("radio");
+  };
+
   const renderScreen = () => {
     switch (currentScreen) {
+      case "homepage":
+        return (
+          <Homepage
+            onSearch={() => {
+              console.log(
+                "NavigationApp: onSearch called, changing to search screen"
+              );
+              onScreenChange("search");
+            }}
+            onServiceClick={handleServiceSelect}
+          />
+        );
+      case "search":
+        return (
+          <SearchPage
+            onBack={handleBack}
+            onServiceSelect={handleServiceSelect}
+          />
+        );
       case "radio":
         return (
           <RadioButtonScreen
@@ -55,9 +89,9 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
         );
       default:
         return (
-          <RadioButtonScreen
-            onNext={() => onScreenChange("checkbox")}
-            onBack={handleBack}
+          <Homepage
+            onSearch={() => onScreenChange("search")}
+            onServiceClick={handleServiceSelect}
           />
         );
     }

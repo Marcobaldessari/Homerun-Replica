@@ -1,58 +1,41 @@
 import React from "react";
+import { SearchBar } from "./SearchBar";
+
+// Image URLs from the Figma export
+const logomark = "/6bc48a6e3f12d4f9a25060895c2044dce86e020f.svg";
+const logotype = "/6c3ee72da4b78702807492fd70de7ca47d5e20ab.svg";
 
 interface HeaderProps {
-  title: string;
-  onBackClick: () => void;
-  onCloseClick: () => void;
+  onSearch: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({
-  title,
-  onBackClick,
-  onCloseClick,
-}) => {
+export const Header: React.FC<HeaderProps> = ({ onSearch }) => {
   return (
-    <div className="bg-white h-12 flex items-center justify-between px-3">
-      <button
-        onClick={onBackClick}
-        className="w-8 h-8 flex items-center justify-center"
-      >
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M16.2426 6.34317L14.8284 4.92896L7.75739 12L14.8285 19.0711L16.2427 17.6569L10.5858 12L16.2426 6.34317Z"
-            fill="#0E0F11"
-          />
-        </svg>
-      </button>
-      <h1 className="text-[#292d33] font-semibold">{title}</h1>
-      <button
-        onClick={onCloseClick}
-        className="w-8 h-8 flex items-center justify-center"
-      >
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289Z"
-            fill="#0E0F11"
-          />
-          <path
-            d="M5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289Z"
-            fill="#0E0F11"
-          />
-        </svg>
-      </button>
+    <div className="bg-white w-full relative z-10">
+      {/* Logo and Search Section */}
+      <div className="bg-white flex flex-col gap-[24px] items-center left-0 pt-[20px] right-0">
+        <div className="box-border flex flex-col gap-[16px] items-center px-[24px] w-full">
+          {/* Logo */}
+          <div className="flex gap-[7px] items-end overflow-clip">
+            <div className="h-[19.769px] w-[12.427px]">
+              <img
+                alt=""
+                className="block max-w-none w-full h-full"
+                src={logomark}
+              />
+            </div>
+            <div className="h-[16.001px] w-[87.285px]">
+              <img
+                alt=""
+                className="block max-w-none w-full h-full"
+                src={logotype}
+              />
+            </div>
+          </div>
+          {/* Search Bar Component */}
+          <SearchBar onSearch={onSearch} />
+        </div>
+      </div>
     </div>
   );
 };
-
