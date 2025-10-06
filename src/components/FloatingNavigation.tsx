@@ -25,23 +25,31 @@ export const FloatingNavigation: React.FC<FloatingNavigationProps> = ({
   onScreenChange,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [position, setPosition] = useState<Position>({ x: 16, y: 16 }); // Default top-right
+  const [position, setPosition] = useState<Position>({ x: 0, y: 8 }); // Default middle-top (will be calculated)
+  const [isInitialized, setIsInitialized] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState<Position>({ x: 0, y: 0 });
   const [hasMoved, setHasMoved] = useState(false);
   const buttonRef = useRef<HTMLDivElement>(null);
 
-  // Load saved position from localStorage on component mount
+  // Set initial position to center on component mount
   useEffect(() => {
-    const savedPosition = localStorage.getItem("floatingNavPosition");
-    if (savedPosition) {
-      try {
-        const parsedPosition = JSON.parse(savedPosition);
-        setPosition(parsedPosition);
-      } catch (error) {
-        console.warn("Failed to parse saved position:", error);
-      }
-    }
+    const centerX = (window.innerWidth - 48) / 2;
+    setPosition({ x: centerX, y: 8 });
+    setIsInitialized(true);
+  }, []);
+
+  // Handle window resize to keep button centered
+  useEffect(() => {
+    const handleResize = () => {
+      setPosition({
+        x: (window.innerWidth - 48) / 2,
+        y: 8,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // Save position to localStorage whenever it changes
@@ -117,6 +125,11 @@ export const FloatingNavigation: React.FC<FloatingNavigationProps> = ({
       document.body.style.userSelect = "";
     };
   }, [isDragging, dragOffset]);
+
+  // Don't render until position is properly calculated
+  if (!isInitialized) {
+    return null;
+  }
 
   return (
     <div
