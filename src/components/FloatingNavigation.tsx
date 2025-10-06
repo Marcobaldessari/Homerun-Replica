@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 export type ScreenType = "homepage" | "search" | "radio" | "checkbox" | "text";
 
@@ -15,11 +15,39 @@ const screenNames = {
   text: "Text Field (Step 3)",
 };
 
+interface Position {
+  x: number;
+  y: number;
+}
+
 export const FloatingNavigation: React.FC<FloatingNavigationProps> = ({
   currentScreen,
   onScreenChange,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [position, setPosition] = useState<Position>({ x: 16, y: 16 }); // Default top-right
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState<Position>({ x: 0, y: 0 });
+  const [hasMoved, setHasMoved] = useState(false);
+  const buttonRef = useRef<HTMLDivElement>(null);
+
+  // Load saved position from localStorage on component mount
+  useEffect(() => {
+    const savedPosition = localStorage.getItem("floatingNavPosition");
+    if (savedPosition) {
+      try {
+        const parsedPosition = JSON.parse(savedPosition);
+        setPosition(parsedPosition);
+      } catch (error) {
+        console.warn("Failed to parse saved position:", error);
+      }
+    }
+  }, []);
+
+  // Save position to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("floatingNavPosition", JSON.stringify(position));
+  }, [position]);
 
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded);
@@ -30,8 +58,78 @@ export const FloatingNavigation: React.FC<FloatingNavigationProps> = ({
     setIsExpanded(false); // Collapse after selection
   };
 
+  // Drag event handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    // Don't start drag if clicking on navigation menu items
+    if ((e.target as HTMLElement).closest(".nav-button")) {
+      return;
+    }
+
+    setIsDragging(true);
+    setHasMoved(false);
+    const rect = buttonRef.current?.getBoundingClientRect();
+    if (rect) {
+      setDragOffset({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      });
+    }
+    e.preventDefault();
+  };
+
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!isDragging) return;
+
+    setHasMoved(true);
+    const newX = e.clientX - dragOffset.x;
+    const newY = e.clientY - dragOffset.y;
+
+    // Constrain to viewport bounds
+    const maxX = window.innerWidth - 48; // 48px is button width
+    const maxY = window.innerHeight - 48; // 48px is button height
+
+    setPosition({
+      x: Math.max(0, Math.min(newX, maxX)),
+      y: Math.max(0, Math.min(newY, maxY)),
+    });
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    // If we haven't moved much, treat it as a click
+    if (!hasMoved) {
+      toggleExpanded();
+    }
+    setHasMoved(false);
+  };
+
+  // Add global mouse event listeners for dragging
+  useEffect(() => {
+    if (isDragging) {
+      document.addEventListener("mousemove", handleMouseMove);
+      document.addEventListener("mouseup", handleMouseUp);
+      document.body.style.userSelect = "none"; // Prevent text selection during drag
+    }
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+      document.body.style.userSelect = "";
+    };
+  }, [isDragging, dragOffset]);
+
   return (
-    <div className="fixed top-4 right-4 z-50">
+    <div
+      ref={buttonRef}
+      className="fixed z-50 select-none"
+      style={{
+        left: `${position.x}px`,
+        top: `${position.y}px`,
+        transform: isDragging ? "scale(1.1)" : "scale(1)",
+        transition: isDragging ? "none" : "transform 0.2s ease",
+      }}
+      onMouseDown={handleMouseDown}
+    >
       {/* Expanded Navigation */}
       {isExpanded && (
         <div className="bg-white border border-gray-200 rounded-lg shadow-lg p-2 mb-2 min-w-[200px]">
@@ -48,7 +146,7 @@ export const FloatingNavigation: React.FC<FloatingNavigationProps> = ({
               <button
                 key={screen}
                 onClick={() => handleScreenChange(screen)}
-                className={`px-3 py-2 text-xs rounded text-left transition-colors ${
+                className={`nav-button px-3 py-2 text-xs rounded text-left transition-colors ${
                   currentScreen === screen
                     ? "bg-blue-500 text-white"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -63,12 +161,16 @@ export const FloatingNavigation: React.FC<FloatingNavigationProps> = ({
 
       {/* Floating Toggle Button */}
       <button
-        onClick={toggleExpanded}
-        className={`w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 ${
-          isExpanded
+        className={`w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 cursor-pointer ${
+          isDragging
+            ? "bg-blue-600 text-white shadow-xl"
+            : isExpanded
             ? "bg-blue-500 text-white"
-            : "bg-white text-gray-700 border border-gray-200"
+            : "bg-white text-gray-700 border border-gray-200 hover:shadow-xl"
         }`}
+        style={{
+          cursor: isDragging ? "grabbing" : "grab",
+        }}
       >
         {isExpanded ? (
           <svg
