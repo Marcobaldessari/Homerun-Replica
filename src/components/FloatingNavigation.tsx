@@ -30,6 +30,7 @@ export const FloatingNavigation: React.FC<FloatingNavigationProps> = ({
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState<Position>({ x: 0, y: 0 });
   const [hasMoved, setHasMoved] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const buttonRef = useRef<HTMLDivElement>(null);
 
   // Set initial position to center on component mount
@@ -50,6 +51,18 @@ export const FloatingNavigation: React.FC<FloatingNavigationProps> = ({
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Handle keyboard event to toggle visibility with 'H' key
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === "h" || e.key === "H") {
+        setIsVisible((prev) => !prev);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
   }, []);
 
   // Save position to localStorage whenever it changes
@@ -126,8 +139,8 @@ export const FloatingNavigation: React.FC<FloatingNavigationProps> = ({
     };
   }, [isDragging, dragOffset]);
 
-  // Don't render until position is properly calculated
-  if (!isInitialized) {
+  // Don't render until position is properly calculated or if not visible
+  if (!isInitialized || !isVisible) {
     return null;
   }
 
