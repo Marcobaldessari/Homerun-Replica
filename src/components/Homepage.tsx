@@ -25,7 +25,7 @@ export const Homepage: React.FC<HomepageProps> = ({
   return (
     <div className="bg-white w-full min-h-screen relative">
       <Header onSearch={handleSearch} />
-      <div className="flex flex-col w-full pb-[98px] pt-[99.769px]">
+      <div className="flex flex-col w-full pb-[98px] pt-[40px]">
         <ServiceCategories onServiceClick={handleServiceClick} />
       </div>
       <BottomNavigation />
