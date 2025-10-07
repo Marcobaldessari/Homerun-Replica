@@ -1,5 +1,5 @@
 {
-  "name": "olympus-ui-request-creation",
+  "name": "homerun-replica",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -31,4 +31,3 @@
     "postcss": "latest"
   }
 }
-
