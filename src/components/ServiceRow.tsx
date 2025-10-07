@@ -1,5 +1,6 @@
 import React from "react";
 import { ServiceItem } from "./ServiceItem";
+import { getServiceImageUrl } from "../utils/serviceParser";
 
 export interface Service {
   id: string;
@@ -29,14 +30,25 @@ export const ServiceRow: React.FC<ServiceRowProps> = ({
         </div>
         {/* Services Row */}
         <div className="flex gap-[16px] items-start overflow-x-auto overflow-y-hidden pb-2 scrollbar-hide w-full">
-          {services.map((service) => (
-            <ServiceItem
-              key={service.id}
-              name={service.name}
-              image={service.image}
-              onClick={() => onServiceClick(service.name)}
-            />
-          ))}
+          {services.map((service) => {
+            // Try to get image from CSV, fallback to service.image
+            const csvImageUrl = getServiceImageUrl(service.name);
+            const imageUrl = csvImageUrl || service.image;
+
+            // Debug logging
+            console.log(
+              `Service: ${service.name}, CSV URL: ${csvImageUrl}, Final URL: ${imageUrl}`
+            );
+
+            return (
+              <ServiceItem
+                key={service.id}
+                name={service.name}
+                image={imageUrl}
+                onClick={() => onServiceClick(service.name)}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

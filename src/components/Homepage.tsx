@@ -1,5 +1,4 @@
 import React from "react";
-import { StatusBar } from "./StatusBar";
 import { Header } from "./Header";
 import { ServiceCategories } from "./ServiceCategories";
 import { BottomNavigation } from "./BottomNavigation";
@@ -25,7 +24,6 @@ export const Homepage: React.FC<HomepageProps> = ({
 
   return (
     <div className="bg-white w-full min-h-screen relative">
-      <StatusBar />
       <Header onSearch={handleSearch} />
       <div className="flex flex-col w-full pb-[98px] pt-[99.769px]">
         <ServiceCategories onServiceClick={handleServiceClick} />
