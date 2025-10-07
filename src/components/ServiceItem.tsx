@@ -39,7 +39,7 @@ export const ServiceItem: React.FC<ServiceItemProps> = ({
           <div className="w-full h-full bg-[#F0F1F2] rounded-[8px]" />
         )}
       </div>
-      <p className="font-semibold leading-[22px] text-[#0e0f11] text-[14px] w-full">
+      <p className="font-semibold leading-[22px] text-[#0e0f11] text-[14px] w-full truncate">
         {name}
       </p>
     </div>
