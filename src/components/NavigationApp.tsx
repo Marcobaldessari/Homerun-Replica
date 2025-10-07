@@ -4,8 +4,9 @@ import { SearchPage } from "./SearchPage";
 import { RadioButtonScreen } from "./RadioButtonScreen";
 import { CheckboxScreen } from "./CheckboxScreen";
 import { TextFieldScreen } from "./TextFieldScreen";
+import { AIInputScreen } from "./AIInputScreen";
 
-export type ScreenType = "homepage" | "search" | "radio" | "checkbox" | "text";
+export type ScreenType = "homepage" | "search" | "radio" | "checkbox" | "text" | "ai-input";
 
 interface NavigationAppProps {
   currentScreen: ScreenType;
@@ -21,6 +22,9 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
       case "search":
         onScreenChange("homepage");
         break;
+      case "ai-input":
+        onScreenChange("homepage");
+        break;
       case "radio":
         onScreenChange("search");
         break;
@@ -32,7 +36,6 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
         break;
       case "homepage":
       default:
-        // Stay on first screen or handle exit
         console.log("Already on first screen");
         break;
     }
@@ -56,6 +59,12 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
               );
               onScreenChange("search");
             }}
+            onAIClick={() => {
+              console.log(
+                "NavigationApp: onAIClick called, changing to AI input screen"
+              );
+              onScreenChange("ai-input");
+            }}
             onServiceClick={handleServiceSelect}
           />
         );
@@ -64,6 +73,18 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
           <SearchPage
             onBack={handleBack}
             onServiceSelect={handleServiceSelect}
+          />
+        );
+      case "ai-input":
+        return (
+          <AIInputScreen
+            onBack={handleBack}
+            onClassificationComplete={(serviceId, categoryId) => {
+              console.log(
+                `NavigationApp: AI classified to service: ${serviceId}, category: ${categoryId}`
+              );
+              onScreenChange("radio");
+            }}
           />
         );
       case "radio":
@@ -91,6 +112,7 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
         return (
           <Homepage
             onSearch={() => onScreenChange("search")}
+            onAIClick={() => onScreenChange("ai-input")}
             onServiceClick={handleServiceSelect}
           />
         );
