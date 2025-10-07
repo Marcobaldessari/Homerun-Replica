@@ -8,7 +8,7 @@ const requestsIcon = "/8491dfae681418841205351e21c53f912a2a5856.svg";
 
 export const BottomNavigation: React.FC = () => {
   return (
-    <div className="absolute bg-white border-t border-[#f0f1f2] bottom-0 flex gap-[32px] items-center justify-center left-0 px-[24px] py-[12px] right-0">
+    <div className="fixed bg-white border-t border-[#f0f1f2] bottom-0 flex gap-[32px] items-center justify-center left-0 px-[24px] py-[12px] right-0 z-40">
       {/* Home */}
       <div className="flex flex-col gap-[4px] items-center">
         <div className="relative size-[24px]">
