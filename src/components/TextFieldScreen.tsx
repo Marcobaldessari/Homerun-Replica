@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { StatusBar } from "./StatusBar";
 import { Header } from "./FormHeader";
 import { ProgressBar } from "./ProgressBar";
 import { PriceRange } from "./PriceRange";
@@ -9,11 +8,13 @@ import { SeasonalityBanner } from "./SeasonalityBanner";
 interface TextFieldScreenProps {
   onNext: () => void;
   onBack: () => void;
+  onClose: () => void;
 }
 
 export const TextFieldScreen: React.FC<TextFieldScreenProps> = ({
   onNext,
   onBack,
+  onClose,
 }) => {
   const [notes, setNotes] = useState("");
 
@@ -28,7 +29,7 @@ export const TextFieldScreen: React.FC<TextFieldScreenProps> = ({
   };
 
   const handleCloseClick = () => {
-    console.log("Close clicked");
+    onClose();
   };
 
   const TextAreaInput = ({
@@ -150,9 +151,6 @@ export const TextFieldScreen: React.FC<TextFieldScreenProps> = ({
 
   return (
     <div className="relative w-full max-w-md flex flex-col min-h-screen">
-      {/* Status Bar */}
-      <StatusBar />
-
       {/* Header */}
       <Header
         title="House painting"

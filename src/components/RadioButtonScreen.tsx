@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { StatusBar } from "./StatusBar";
 import { Header } from "./FormHeader";
 import { ProgressBar } from "./ProgressBar";
 import { PriceRange } from "./PriceRange";
@@ -9,11 +8,13 @@ import { SeasonalityBanner } from "./SeasonalityBanner";
 interface RadioButtonScreenProps {
   onNext: () => void;
   onBack: () => void;
+  onClose: () => void;
 }
 
 export const RadioButtonScreen: React.FC<RadioButtonScreenProps> = ({
   onNext,
   onBack,
+  onClose,
 }) => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
@@ -31,7 +32,7 @@ export const RadioButtonScreen: React.FC<RadioButtonScreenProps> = ({
   };
 
   const handleCloseClick = () => {
-    console.log("Close clicked");
+    onClose();
   };
 
   const SquareMeterSelector = () => {
@@ -86,14 +87,12 @@ export const RadioButtonScreen: React.FC<RadioButtonScreenProps> = ({
 
   return (
     <div className="flex flex-col min-h-screen w-full max-w-md mx-auto bg-white relative">
-      {/* Status Bar */}
-      <StatusBar />
-
       {/* Header */}
       <Header
         title="House painting"
         onBackClick={handleBackClick}
         onCloseClick={handleCloseClick}
+        showBackButton={false}
       />
 
       {/* Progress Bar */}

@@ -45,6 +45,10 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
     onScreenChange("radio");
   };
 
+  const handleClose = () => {
+    onScreenChange("homepage");
+  };
+
   const renderScreen = () => {
     switch (currentScreen) {
       case "homepage":
@@ -71,6 +75,7 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
           <RadioButtonScreen
             onNext={() => onScreenChange("checkbox")}
             onBack={handleBack}
+            onClose={handleClose}
           />
         );
       case "checkbox":
@@ -78,6 +83,7 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
           <CheckboxScreen
             onNext={() => onScreenChange("text")}
             onBack={handleBack}
+            onClose={handleClose}
           />
         );
       case "text":
@@ -85,6 +91,7 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
           <TextFieldScreen
             onNext={() => console.log("Form completed!")}
             onBack={handleBack}
+            onClose={handleClose}
           />
         );
       default:

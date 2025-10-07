@@ -8,6 +8,7 @@ import { SeasonalityBanner } from "./SeasonalityBanner";
 interface CheckboxScreenProps {
   onNext: () => void;
   onBack: () => void;
+  onClose: () => void;
 }
 
 interface CheckboxOption {
@@ -19,6 +20,7 @@ interface CheckboxOption {
 export const CheckboxScreen: React.FC<CheckboxScreenProps> = ({
   onNext,
   onBack,
+  onClose,
 }) => {
   const [options, setOptions] = useState<CheckboxOption[]>([
     { id: "right-front-door", label: "Right front door", checked: false },
@@ -56,7 +58,7 @@ export const CheckboxScreen: React.FC<CheckboxScreenProps> = ({
   };
 
   const handleCloseClick = () => {
-    console.log("Close clicked");
+    onClose();
   };
 
   const CheckedIcon = () => (
