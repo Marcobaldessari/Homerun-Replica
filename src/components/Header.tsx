@@ -14,7 +14,7 @@ export const Header: React.FC<HeaderProps> = ({ onSearch }) => {
     <div className="bg-white w-full relative z-10">
       {/* Logo and Search Section */}
       <div className="bg-white flex flex-col gap-[24px] items-center left-0 pt-[40px] right-0">
-        <div className="box-border flex flex-col gap-[16px] items-center px-[24px] w-full">
+        <div className="box-border flex flex-col gap-[24px] items-center px-[24px] w-full">
           {/* Logo */}
           <div className="flex gap-[7px] items-end overflow-clip">
             <div className="h-[19.769px] w-[12.427px]">

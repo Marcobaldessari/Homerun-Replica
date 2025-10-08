@@ -50,7 +50,7 @@ export const RadioButtonScreen: React.FC<RadioButtonScreenProps> = ({
     ];
 
     return (
-      <div className="border border-[#e3e5e8] rounded-lg p-5 mb-4">
+      <div className="mb-4">
         {options.map((option) => (
           <label
             key={option}

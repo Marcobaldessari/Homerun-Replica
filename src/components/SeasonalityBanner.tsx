@@ -6,14 +6,13 @@ export const SeasonalityBanner: React.FC = () => {
       <p className="text-[#f0f1f2] text-sm">
         This service is 17% cheaper in February!
       </p>
-      <div className="p-3">
+      <div className="flex items-center justify-center">
         <img
-          src="/8dc1cb8224fe58f25816f561467043cceb7d3cf9.svg"
+          src="/icons/Info.svg"
           alt="Info"
-          className="w-4 h-4"
+          className="w-6 h-6 brightness-0 invert"
         />
       </div>
     </div>
   );
 };
-

@@ -15,7 +15,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
   return (
     <div
-      className="bg-white border border-[#f0f1f2] box-border flex gap-[8px] items-center justify-center max-w-[480px] min-w-[327px] pl-[16px] pr-[4px] py-[4px] rounded-[40px] w-full cursor-pointer"
+      className="bg-white border border-[#e3e5e8] shadow-[0_4px_8px_0_rgba(0,0,0,0.12)] box-border flex gap-[8px] items-center justify-center max-w-[480px] min-w-[327px] pl-[24px] pr-[4px] py-[4px] rounded-[40px] w-full cursor-pointer"
       onClick={handleSearch}
     >
       <div className="basis-0 flex flex-col font-normal grow justify-center leading-[0] min-h-px min-w-px overflow-hidden text-[#6a7482] text-[14px] text-nowrap">

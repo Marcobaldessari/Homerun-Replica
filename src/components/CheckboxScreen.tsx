@@ -119,7 +119,7 @@ export const CheckboxScreen: React.FC<CheckboxScreenProps> = ({
 
         {/* Checkbox List */}
         <div className="px-6">
-          <div className="border border-[#e3e5e8] rounded-lg p-5 space-y-5">
+          <div className="space-y-5">
             {options.map((option) => (
               <button
                 key={option.id}
