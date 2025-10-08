@@ -15,24 +15,28 @@ export const Header: React.FC<FormHeaderProps> = ({
 }) => {
   return (
     <div className="bg-white px-4 py-3">
-      <div className="flex items-center justify-between">
-        {showBackButton && onBackClick ? (
+      <div className="grid grid-cols-3 items-center">
+        <div className="flex justify-start">
+          {showBackButton && onBackClick && (
+            <button
+              onClick={onBackClick}
+              className="text-gray-600 hover:text-gray-800"
+            >
+              ← Back
+            </button>
+          )}
+        </div>
+        <h1 className="text-lg font-semibold text-gray-800 text-center">
+          {title}
+        </h1>
+        <div className="flex justify-end">
           <button
-            onClick={onBackClick}
+            onClick={onCloseClick}
             className="text-gray-600 hover:text-gray-800"
           >
-            ← Back
+            ✕
           </button>
-        ) : (
-          <div className="w-16"></div>
-        )}
-        <h1 className="text-lg font-semibold text-gray-800">{title}</h1>
-        <button
-          onClick={onCloseClick}
-          className="text-gray-600 hover:text-gray-800"
-        >
-          ✕
-        </button>
+        </div>
       </div>
     </div>
   );
