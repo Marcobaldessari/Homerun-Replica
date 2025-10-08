@@ -55,7 +55,7 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
             </div>
             <p
               className={`font-medium leading-[20px] text-[12px] ${
-                isActive ? "text-[#2cb34f]" : "text-[#6a7482]"
+                isActive ? "text-[#0e0f11]" : "text-[#6a7482]"
               }`}
             >
               {item.label}
