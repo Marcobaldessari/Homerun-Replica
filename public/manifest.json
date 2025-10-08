@@ -3,12 +3,10 @@
   "short_name": "Homerun",
   "description": "Get service providers for your home needs",
   "start_url": "/",
-  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2cb34f",
   "orientation": "portrait",
-  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/vite.svg",
