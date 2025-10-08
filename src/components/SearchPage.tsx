@@ -48,6 +48,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
             placeholder="E.g., painter"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            autoFocus
             className="w-full py-2 text-base font-normal text-[#0e0f11] outline-none"
           />
         </div>
