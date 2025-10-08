@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import { ServiceItem } from "./ServiceItem";
-import { getServiceImageUrl } from "../utils/serviceParser";
 
 export interface Service {
   id: string;
@@ -97,25 +96,14 @@ export const ServiceRow: React.FC<ServiceRowProps> = ({
           onMouseLeave={handleMouseLeave}
           onClick={handleClick}
         >
-          {services.map((service) => {
-            // Try to get image from CSV, fallback to service.image
-            const csvImageUrl = getServiceImageUrl(service.name);
-            const imageUrl = csvImageUrl || service.image;
-
-            // Debug logging
-            console.log(
-              `Service: ${service.name}, CSV URL: ${csvImageUrl}, Final URL: ${imageUrl}`
-            );
-
-            return (
-              <ServiceItem
-                key={service.id}
-                name={service.name}
-                image={imageUrl}
-                onClick={() => onServiceClick(service.name)}
-              />
-            );
-          })}
+          {services.map((service) => (
+            <ServiceItem
+              key={service.id}
+              name={service.name}
+              image={service.image}
+              onClick={() => onServiceClick(service.name)}
+            />
+          ))}
         </div>
       </div>
     </div>

@@ -1,0 +1,292 @@
+[
+  {
+    "category": "Trending Services",
+    "services": [
+      {
+        "serviceID": 16323,
+        "serviceName": "Plastering",
+        "imageURL": "16323-plastering.jpg"
+      },
+      {
+        "serviceID": 505,
+        "serviceName": "Moving",
+        "imageURL": "00505-moving.jpg"
+      },
+      {
+        "serviceID": 7357,
+        "serviceName": "Bed Assembly",
+        "imageURL": "06986-montaz-postele.jpg"
+      },
+      {
+        "serviceID": 289,
+        "serviceName": "Carpet Cleaning",
+        "imageURL": "00087-hali-yikama-temizleme.jpg"
+      },
+      {
+        "serviceID": 49105,
+        "serviceName": "End of Tenancy Cleaning",
+        "imageURL": "49105-end-of-tenancy-cleaning.jpg"
+      },
+      {
+        "serviceID": 3548,
+        "serviceName": "Airbnb Photographer",
+        "imageURL": "01962-property-photography.jpg"
+      },
+      {
+        "serviceID": 30765,
+        "serviceName": "Laminate Flooring Fitters",
+        "imageURL": "30765-laminate-flooring-fitters.jpg"
+      },
+      {
+        "serviceID": 1694,
+        "serviceName": "Flat Renovation",
+        "imageURL": "01694-flat-renovation.jpg"
+      }
+    ]
+  },
+  {
+    "category": "Repair and Assembly",
+    "services": [
+      {
+        "serviceID": 80152,
+        "serviceName": "TV Bracket Installation",
+        "imageURL": "80152-tv-bracket-installation.jpg"
+      },
+      {
+        "serviceID": 4600,
+        "serviceName": "TV Wall Mounting",
+        "imageURL": "00441-televizyon-duvara-montaj.jpg"
+      },
+      {
+        "serviceID": 58555,
+        "serviceName": "Tiling",
+        "imageURL": "00266-fayans-seramik-doseme.jpg"
+      },
+      {
+        "serviceID": 1338,
+        "serviceName": "Fence Painting",
+        "imageURL": "01338-fence-painting.jpg"
+      },
+      {
+        "serviceID": 7379,
+        "serviceName": "IKEA Furniture Assembly",
+        "imageURL": "111997-montaggio-mobili-ikea.jpeg"
+      },
+      {
+        "serviceID": 7360,
+        "serviceName": "Wardrobe Assembly",
+        "imageURL": "72237-gardrop-montaji.jpeg"
+      },
+      {
+        "serviceID": 35335,
+        "serviceName": "Furniture Assembly",
+        "imageURL": "56789-furniture-assembly.jpg"
+      },
+      {
+        "serviceID": 7357,
+        "serviceName": "Bed Assembly",
+        "imageURL": "06986-montaz-postele.jpg"
+      }
+    ]
+  },
+  {
+    "category": "Events",
+    "services": [
+      {
+        "serviceID": 1961,
+        "serviceName": "Family Photographer",
+        "imageURL": "01961-family-photography.jpg"
+      },
+      {
+        "serviceID": 1959,
+        "serviceName": "Fashion Photography",
+        "imageURL": "01959-fashion-photography.jpg"
+      },
+      {
+        "serviceID": 1958,
+        "serviceName": "Product Photography",
+        "imageURL": "01958-product-photography.jpg"
+      },
+      {
+        "serviceID": 409,
+        "serviceName": "Photographer",
+        "imageURL": "00074-fotografci.jpg"
+      },
+      {
+        "serviceID": 221,
+        "serviceName": "Wedding Photographer",
+        "imageURL": "00221-wedding-photographer.jpg"
+      },
+      {
+        "serviceID": 1962,
+        "serviceName": "Property Photographer",
+        "imageURL": "01962-property-photography.jpg"
+      },
+      {
+        "serviceID": 6920,
+        "serviceName": "Birthday Photographer",
+        "imageURL": "18456-dogum-gunu-fotografcisi.jpg"
+      },
+      {
+        "serviceID": 1956,
+        "serviceName": "Event Photographer",
+        "imageURL": "02041-dis-cekim-fotograf.jpg"
+      }
+    ]
+  },
+  {
+    "category": "Business",
+    "services": [
+      {
+        "serviceID": 27440,
+        "serviceName": "Graphic Design",
+        "imageURL": "00080-grafik-tasarim.jpg"
+      },
+      {
+        "serviceID": 489,
+        "serviceName": "Web Design",
+        "imageURL": "00206-web-tasarim-ve-programlama.jpg"
+      },
+      {
+        "serviceID": 4666,
+        "serviceName": "Logo Design",
+        "imageURL": "00051-logo-tasarim.jpg"
+      },
+      {
+        "serviceID": 1808,
+        "serviceName": "Website Design",
+        "imageURL": "00271-web-site-yapimi.jpg"
+      }
+    ]
+  },
+  {
+    "category": "Cleaning",
+    "services": [
+      {
+        "serviceID": 4592,
+        "serviceName": "Rubbish Removal",
+        "imageURL": "04592-rubbish-removal.jpg"
+      },
+      {
+        "serviceID": 2768,
+        "serviceName": "Airbnb Cleaning",
+        "imageURL": "02768-airbnb-cleaning.jpg"
+      },
+      {
+        "serviceID": 2710,
+        "serviceName": "Packers and Movers",
+        "imageURL": "02710-packing-and-moving.jpg"
+      },
+      {
+        "serviceID": 4144,
+        "serviceName": "Regular Cleaning",
+        "imageURL": "04144-regular-cleaning.jpg"
+      },
+      {
+        "serviceID": 71931,
+        "serviceName": "Deep Cleaning",
+        "imageURL": "71931-deep-cleaning.jpg"
+      },
+      {
+        "serviceID": 72936,
+        "serviceName": "Move Out Cleaning",
+        "imageURL": "00669-bos-ev-temizligi.jpg"
+      },
+      {
+        "serviceID": 505,
+        "serviceName": "Moving",
+        "imageURL": "00505-moving.jpg"
+      }
+    ]
+  },
+  {
+    "category": "Home Improvement",
+    "services": [
+      {
+        "serviceID": 4146,
+        "serviceName": "After Builders Cleaning",
+        "imageURL": "04146-after-builders-cleaning.jpg"
+      },
+      {
+        "serviceID": 63743,
+        "serviceName": "Wood Flooring Fitters",
+        "imageURL": "63743-wood-flooring-fitters.jpg"
+      },
+      {
+        "serviceID": 1694,
+        "serviceName": "Flat Renovation",
+        "imageURL": "01694-flat-renovation.jpg"
+      },
+      {
+        "serviceID": 16322,
+        "serviceName": "Painter and Decorator",
+        "imageURL": "16322-painter-and-decorator.jpg"
+      },
+      {
+        "serviceID": 30765,
+        "serviceName": "Laminate Flooring Fitters",
+        "imageURL": "30765-laminate-flooring-fitters.jpg"
+      },
+      {
+        "serviceID": 4098,
+        "serviceName": "Laminate Flooring Installation",
+        "imageURL": "04098-laminate-flooring-installation.jpg"
+      },
+      {
+        "serviceID": 169,
+        "serviceName": "House Painting",
+        "imageURL": "00169-house-painting.jpg"
+      },
+      {
+        "serviceID": 16325,
+        "serviceName": "Carpet Fitters",
+        "imageURL": "16325-carpet-fitters.jpg"
+      }
+    ]
+  },
+  {
+    "category": "Moving",
+    "services": [
+      {
+        "serviceID": 33653,
+        "serviceName": "Movers",
+        "imageURL": "33653-mover.jpg"
+      },
+      {
+        "serviceID": 1522,
+        "serviceName": "Sofa Moving",
+        "imageURL": "03583-yuk-tasima.jpg"
+      },
+      {
+        "serviceID": 2710,
+        "serviceName": "Packers and Movers",
+        "imageURL": "02710-packing-and-moving.jpg"
+      },
+      {
+        "serviceID": 8728,
+        "serviceName": "Fridge Movers",
+        "imageURL": ""
+      },
+      {
+        "serviceID": 16319,
+        "serviceName": "Man With a Van",
+        "imageURL": "16319-man-with-a-van.jpg"
+      },
+      {
+        "serviceID": 1819,
+        "serviceName": "House Moving",
+        "imageURL": "00501-sehirler-arasi-nakliyat.jpg"
+      },
+      {
+        "serviceID": 505,
+        "serviceName": "Moving",
+        "imageURL": "00505-moving.jpg"
+      },
+      {
+        "serviceID": 4592,
+        "serviceName": "Rubbish Removal",
+        "imageURL": "04592-rubbish-removal.jpg"
+      }
+    ]
+  }
+]
