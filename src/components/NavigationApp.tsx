@@ -5,7 +5,15 @@ import { RadioButtonScreen } from "./RadioButtonScreen";
 import { CheckboxScreen } from "./CheckboxScreen";
 import { TextFieldScreen } from "./TextFieldScreen";
 
-export type ScreenType = "homepage" | "search" | "radio" | "checkbox" | "text";
+export type ScreenType =
+  | "homepage"
+  | "search"
+  | "radio"
+  | "checkbox"
+  | "text"
+  | "notifications"
+  | "jobs"
+  | "settings";
 
 interface NavigationAppProps {
   currentScreen: ScreenType;
@@ -61,6 +69,8 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
               onScreenChange("search");
             }}
             onServiceClick={handleServiceSelect}
+            currentScreen={currentScreen}
+            onNavigate={onScreenChange}
           />
         );
       case "search":
@@ -94,11 +104,40 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
             onClose={handleClose}
           />
         );
+      case "notifications":
+        return (
+          <Homepage
+            onSearch={() => onScreenChange("search")}
+            onServiceClick={handleServiceSelect}
+            currentScreen={currentScreen}
+            onNavigate={onScreenChange}
+          />
+        );
+      case "jobs":
+        return (
+          <Homepage
+            onSearch={() => onScreenChange("search")}
+            onServiceClick={handleServiceSelect}
+            currentScreen={currentScreen}
+            onNavigate={onScreenChange}
+          />
+        );
+      case "settings":
+        return (
+          <Homepage
+            onSearch={() => onScreenChange("search")}
+            onServiceClick={handleServiceSelect}
+            currentScreen={currentScreen}
+            onNavigate={onScreenChange}
+          />
+        );
       default:
         return (
           <Homepage
             onSearch={() => onScreenChange("search")}
             onServiceClick={handleServiceSelect}
+            currentScreen={currentScreen}
+            onNavigate={onScreenChange}
           />
         );
     }

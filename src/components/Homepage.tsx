@@ -6,11 +6,15 @@ import { BottomNavigation } from "./BottomNavigation";
 interface HomepageProps {
   onSearch: () => void;
   onServiceClick: (serviceName: string) => void;
+  currentScreen: string;
+  onNavigate: (screen: string) => void;
 }
 
 export const Homepage: React.FC<HomepageProps> = ({
   onSearch,
   onServiceClick,
+  currentScreen,
+  onNavigate,
 }) => {
   const handleSearch = () => {
     console.log("Homepage: handleSearch called");
@@ -28,7 +32,7 @@ export const Homepage: React.FC<HomepageProps> = ({
       <div className="flex flex-col w-full pb-[98px] pt-[40px]">
         <ServiceCategories onServiceClick={handleServiceClick} />
       </div>
-      <BottomNavigation />
+      <BottomNavigation currentScreen={currentScreen} onNavigate={onNavigate} />
     </div>
   );
 };

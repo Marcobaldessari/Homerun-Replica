@@ -12,8 +12,8 @@ export const CTA: React.FC<CTAProps> = ({
   className = "",
 }) => {
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#e3e5e8] p-6 z-10 flex justify-center">
-      <div className="w-full max-w-md">
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#e3e5e8] z-10 flex justify-center">
+      <div className="w-full max-w-md p-6">
         <button
           type="button"
           onClick={onClick}
