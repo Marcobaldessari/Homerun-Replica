@@ -102,7 +102,6 @@ export const RadioButtonScreen: React.FC<RadioButtonScreenProps> = ({
 
       {/* Price Range */}
       <PriceRange minPrice="350 TL" maxPrice="1.100 TL" />
-      <div className="h-px bg-[#e3e5e8] w-full shadow-sm"></div>
 
       {/* Seasonality Banner */}
       <SeasonalityBanner />

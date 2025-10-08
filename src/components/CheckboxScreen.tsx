@@ -101,9 +101,7 @@ export const CheckboxScreen: React.FC<CheckboxScreenProps> = ({
       </div>
 
       {/* Price Range */}
-      <div className="bg-white border-b border-[#e3e5e8]">
-        <PriceRange minPrice="350 TL" maxPrice="1.100 TL" />
-      </div>
+      <PriceRange minPrice="350 TL" maxPrice="1.100 TL" />
 
       {/* Seasonality Banner */}
       <SeasonalityBanner />
