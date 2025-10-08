@@ -37,7 +37,7 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
   ];
 
   return (
-    <div className="fixed bg-white border-t border-[#f0f1f2] bottom-0 flex gap-[32px] items-center justify-center left-0 px-[24px] py-[12px] right-0 z-40">
+    <div className="fixed bg-white border-t border-[#f0f1f2] bottom-0 left-1/2 -translate-x-1/2 max-w-[28rem] w-full z-40 flex gap-[32px] items-center justify-center px-[24px] py-[12px]">
       {navItems.map((item) => {
         const isActive = currentScreen === item.id;
         return (
