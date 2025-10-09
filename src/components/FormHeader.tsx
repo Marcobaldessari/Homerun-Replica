@@ -22,7 +22,7 @@ export const Header: React.FC<FormHeaderProps> = ({
               onClick={onBackClick}
               className="text-gray-600 hover:text-gray-800"
             >
-              ← Back
+              ←
             </button>
           )}
         </div>
