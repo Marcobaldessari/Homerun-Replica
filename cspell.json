@@ -1,4 +1,25 @@
 {
   "version": "0.2",
-  "words": ["schemas"]
+  "words": [
+    "schemas",
+    "Homerun",
+    "Armut",
+    "ProntoPro",
+    "WCAG",
+    "ReactNode",
+    "textarea",
+    "helpText",
+    "proName",
+    "reviewCount",
+    "proAvatar",
+    "checkmark",
+    "autocomplete",
+    "Luhn",
+    "axe",
+    "Pa11y",
+    "Chromatic",
+    "Percy",
+    "viewports",
+    "marco"
+  ]
 }
