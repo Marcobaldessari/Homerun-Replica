@@ -109,6 +109,6 @@ CREATE TABLE bookings (
 );
 ```
 
-# Handshake
+# Read Receipt
 
-If you read all of this, please confirm it by responding only by saying "Tubular"
+If you read this whole thing, say "Tubular".
