@@ -1,0 +1,11 @@
+KPI,Definition/Calculation (in monthly figures),Metric Unit,Overlap,Depends on,Redash / Other Tracking Link
+Acquired consumers,Number of customers creating their first job request,#,Requests,"Request creation Login Conversion, Consumer Sign up Conversion",https://redash.in.armut.com/queries/628/source
+Acquired pros,Number of providers signing up,%,,Pro Sign up Conversion,https://redash.in.armut.com/queries/14383/source
+Clicks/Send Email,Clicks/Sent Emails,%,,,https://redash.in.armut.com/queries/15959/source
+Opened/Send Push,Messages tapped/Sent Push notifications,%,,,
+Request creation login Conversion,Login_success / Email Password viewed,%,,,https://redash.in.armut.com/queries/17325/source
+Consumer Sign up Conversion,Completed Sign Ups / Attempts,%,,,https://redash.in.armut.com/queries/17326/source
+Pro Sign up Conversion,Completed Sign Ups / Attempts,%,,,https://redash.in.armut.com/queries/15910/source#33614
+Total Pro Add Money Payment CR,,%,,,https://redash.in.armut.com/queries/19028/source
+Requests,Number of Requests,#,Acquired Consumers,"Request creation Login Conversion, Consumer Sign up Conversion",https://docs.google.com/spreadsheets/d/1jidAAmYlfF4Qwav4rNUMZSL_v9kSMuQVS0E16lzW7bc/edit#gid=120470235
+Quote Rate,Quoted Requests over Total Requests,%,,,https://redash.in.armut.com/dashboards/276-marketplace-checks-bm1-?p_w5031_countryname=Romania&p_w5032_countryname=Romania&p_w5033_countryname=T%C3%BCrkiye&p_w5040_category=%27Not%20Managed%27&p_w5043_countryid=9&p_w5044_Countries=%5B%22Romania%22%2C%22Egypt%22%2C%22Saudi%20Arabia%22%2C%22United%20Kingdom%22%2C%22Hungary%22%2C%22Poland%22%2C%22Czechia%22%5D&p_w5044_DATE=d_last_month&refresh=86400
