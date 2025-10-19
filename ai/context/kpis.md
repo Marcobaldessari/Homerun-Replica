@@ -1,6 +1,7 @@
 # Key Performance Indicators (KPIs)
 
 Core driver metrics
+
 **Source**: [Homerun Goals](https://docs.google.com/spreadsheets/d/1Wf7Lc94YkAaT1YDjCKnEpgkLsbEE7r8y00rgel8GSAo/edit?gid=119972758#gid=119972758)
 
 ---
@@ -54,7 +55,7 @@ Core driver metrics
 
 ---
 
-## Request Metrics
+## Engagement Metrics
 
 ### Requests
 
@@ -65,12 +66,9 @@ Core driver metrics
 
 ---
 
-## Engagement Metrics
-
 ### Quote Rate
 
 **Definition:** Quoted Requests over Total Requests  
-**Unit:** Percentage (%)  
 **Track:** [Redash Dashboard](https://redash.in.armut.com/dashboards/276-marketplace-checks-bm1-?p_w5031_countryname=Romania&p_w5032_countryname=Romania&p_w5033_countryname=T%C3%BCrkiye&p_w5040_category=%27Not%20Managed%27&p_w5043_countryid=9&p_w5044_Countries=%5B%22Romania%22%2C%22Egypt%22%2C%22Saudi%20Arabia%22%2C%22United%20Kingdom%22%2C%22Hungary%22%2C%22Poland%22%2C%22Czechia%22%5D&p_w5044_DATE=d_last_month&refresh=86400)
 
 ---
@@ -78,7 +76,6 @@ Core driver metrics
 ### Clicks/Send Email
 
 **Definition:** Clicks / Sent Emails  
-**Unit:** Percentage (%)  
 **Track:** [Redash Query](https://redash.in.armut.com/queries/15959/source)
 
 ---
@@ -86,7 +83,6 @@ Core driver metrics
 ### Opened/Send Push
 
 **Definition:** Messages tapped / Sent Push notifications  
-**Unit:** Percentage (%)  
 **Track:** _(TBD)_
 
 ---
