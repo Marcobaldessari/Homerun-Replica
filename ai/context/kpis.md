@@ -10,7 +10,6 @@ Core driver metrics
 ### Acquired Consumers
 
 **Definition:** Number of customers creating their first job request  
-**Unit:** Count (#)  
 **Overlaps with:** Requests  
 **Dependencies:** Request creation Login Conversion, Consumer Sign up Conversion  
 **Track:** [Redash Query](https://redash.in.armut.com/queries/628/source)
@@ -20,7 +19,6 @@ Core driver metrics
 ### Consumer Sign up Conversion
 
 **Definition:** Completed Sign Ups / Attempts  
-**Unit:** Percentage (%)  
 **Track:** [Redash Query](https://redash.in.armut.com/queries/17326/source)
 
 ---
@@ -28,7 +26,6 @@ Core driver metrics
 ### Request Creation Login Conversion
 
 **Definition:** Login_success / Email Password viewed  
-**Unit:** Percentage (%)  
 **Track:** [Redash Query](https://redash.in.armut.com/queries/17325/source)
 
 ---
@@ -38,7 +35,6 @@ Core driver metrics
 ### Acquired Pros
 
 **Definition:** Number of providers signing up  
-**Unit:** Percentage (%)  
 **Dependencies:** Pro Sign up Conversion  
 **Track:** [Redash Query](https://redash.in.armut.com/queries/14383/source)
 
@@ -47,7 +43,6 @@ Core driver metrics
 ### Pro Sign up Conversion
 
 **Definition:** Completed Sign Ups / Attempts  
-**Unit:** Percentage (%)  
 **Track:** [Redash Query](https://redash.in.armut.com/queries/15910/source#33614)
 
 ---
@@ -55,7 +50,6 @@ Core driver metrics
 ### Total Pro Add Money Payment CR
 
 **Definition:** _(TBD)_  
-**Unit:** Percentage (%)  
 **Track:** [Redash Query](https://redash.in.armut.com/queries/19028/source)
 
 ---
@@ -65,7 +59,6 @@ Core driver metrics
 ### Requests
 
 **Definition:** Number of Requests  
-**Unit:** Count (#)  
 **Overlaps with:** Acquired Consumers  
 **Dependencies:** Request creation Login Conversion, Consumer Sign up Conversion  
 **Track:** [Google Sheets](https://docs.google.com/spreadsheets/d/1jidAAmYlfF4Qwav4rNUMZSL_v9kSMuQVS0E16lzW7bc/edit#gid=120470235)
