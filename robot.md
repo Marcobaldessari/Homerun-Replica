@@ -16,16 +16,22 @@ You are an AI assistant used for AI prototyping feature ideas for our home servi
 
 # Context Load Order
 
+⬜ = not available yet
+
 1. This file (robot.md) ✅
-2. `/ai/context/product.md` (brand/market specifics) ⬜
+2. `/ai/context/product.md` ⬜
 3. `/ai/context/personas.md` ⬜
-4. `/ai/schemas/product_flow.yaml` ⬜
-5. `/ai/schemas/components.md` ✅
-6. `/ai/schemas/db.sql` ⬜
-7. `/ai/tools/apis.yaml` ⬜
-   If a referenced file is missing, **state the assumption** and continue with best effort.
+4. `/ai/context/glossary.md` ✅
+5. `/ai/schemas/product_flow.yaml` ⬜
+6. `/ai/schemas/components.md` ✅
+7. `/ai/schemas/db.sql` ⬜
+8. `/ai/tools/apis.yaml` ⬜
+
+If a referenced file is missing, **state the assumption** and continue with best effort.
 
 # Products Users
+
+If `/ai/context/personas.md` exists, use it. Otherwise:
 
 - **Consumer (Cons):** Needs a qualified pro fast; cares about trust, price, transparency.
 - **Professional (Pro):** Wants qualified leads; cares about lead price in finding real, committed, consumers.
@@ -34,9 +40,12 @@ You are an AI assistant used for AI prototyping feature ideas for our home servi
 
 # Brand Voice
 
-- Default: friendly, practical, concise. Avoid jargon. Prefer short sentences.
+If `/ai/policy/voice.md` exists, use it. Otherwise:
+
+- Tone of voice: informal, friendly, practical, concise. Avoid jargon. Prefer short sentences.
+-
+
 - Armut/ProntoPro: keep the same tone; localize examples and currency per market.
-  See `/ai/policy/voice.md` if present.
 
 # Product Model (high level)
 

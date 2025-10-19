@@ -1,0 +1,74 @@
+ID,Official Term,Definition /Formula,BM,Alternative,Notes,Abbreviation,Cancelled/ Obsolete terms
+1,Pro,An individual or a company that provides services at Homerun,"BM1,BM2",,"We're not sure yet if it stands for provider or professional. If it stood for Provider, it would fit well with Consumer",,Merchant
+2,Consumer,An individual or a company that uses Homerun to get a service,"BM1,BM2",,,,Customer
+3,Request,A 'Request' is an entry created in the system when a consumer requires a service. It includes all the information provided by the consumer and is assigned a unique jobid,"BM1,BM2","Job, Job Request","the reason why job is used there is that it functions as an Attributive Noun in most phrases: job request, job opportunity (etc). it defines other nouns and as such it was chosen as an abbreviation at times. what we all agree on in terms of a clear difference between job and request, taken individually, is that job comes after in an hypothetical consumer’s funnel, yet where and how this division happens is not clear. therefore we let the common use take over. for example: it came more natural for the cancellation to be attributed to request, and for fulfilled to be attributed to job. even though we see the level of ambiguity it leaves us with, it’s an ambiguity that we are deeply interconnected with anyway and as such we accepted. for example: we have something called job_status_id or job_id, which refers to the request, but our KPI is QpRs, not QpJs (modificato) ",,
+4,Request details,"Answer to the open ended question that is filled in by Consumer at the end of the Request Maker. With this question, it is aimed to get more details about the Request from the Consumer and show it to the pros in order to help them to decide whether they're interested in this Request or not.   ","BM1,BM2",,,,Job Details
+5,Request creation,The funnel of questions the Consumer follows to specify their needs and submit a Request.,"BM1,BM2",,,,"Customer Onboarding (COB), Request Maker"
+6,Phone verification,The process to verify the legitimacy of a new user through an OTP sent via SMS,"BM1,BM2",,,,-
+7,Phone shared Request,A Request in which the Consumer decided to share their phone contact selected it as their preferred contact method. Pros can see the phone number as soon as they quote.,"BM1,BM2",,,,-
+8,Matching,The algorithm that assesses the most suitable pros and sends them Requests. It generates Opportunities,"BM1,BM2",,,,Dispatch (even though is slightly different)
+9,Quote,Short for quotation: it's the first response the Pro provides the Consumer with. It could contain a quotation amount and a message,BM1,,,,
+10,Quoted Request,A Request that received at least one quote ,BM1,,,,Quoted job
+11,DEPRECATED - Auto payment,Automatic re-purchase mode triggered when the balance is under a certain threshold or when a Pro quotes a Request that costs more credits than the amount they have on their balance. ,"BM1,BM2",,,,ProntoRicarica
+12,DEPCREATED - Pro calendar,Calendar in which a Pro can specify their avalability (day based) and specifying a minium days anticipation from the Request day to the job day. They affect all the services added to their profile ,"BM1,BM2",,,,"Calendar Preferences, Merchant Calendar"
+13,Pro signup,The flow through which a Pro selects the services they want to offer and provides personal information to create a profile and eventually gets subscribed,"BM1,BM2",,,,Pro Onboarding (POB)
+14,Pro page,"The public profile page of a Pro. It contains profile picture, description, reviews, photo gallery and more ","BM1,BM2",,,,"Merchant Page (PP), Pro Profile (AR)"
+15,Paid landing pages,Landing pages used in marketing campaign for users acquisition. We could have both Consumers and Pros Paid Landing Pages,"BM1,BM2",,,,CPC Landing Pages
+16,Quote rate,Ratio of all 1+ quoted Requests over all Requests submitted in chosen service/category for chosen time period. ,BM1,,,QR,
+17,Quotes per quoted,A business metric to describe average number of quotes that quoted Requests get in a certain period of time (# of quotes/# of quoted jobs),BM1,,,,
+18,Opportunity,"A Request that is matched to a Pro, created from a Consumer Request. From every Request multiple opportunities could be generated",BM1,Job opportunity,,,Merchant inbox
+19,Quote creation,"The flow of replying to a Request, which means sending the quote to the Consumer",BM1,,,,Make a quote
+20,Lead price,Price that a Pro pays irrespective of the business model,BM1,,Related with the metric ALP (average lead price),,"Lead price, quote price"
+21,Commission fee,"Our share of the actual job price we charge to pros for the fulfilled jobs, currently only in book now model and automatically deducted from the pro payout.",BM2,,,,
+22,Proposed job price,The price that is proposed by the pro to provide the Requested service.,BM1,,,,Quote Amount
+23,Actual job price,"The final price that is paid by the consumer to the pro. When the pro and consumer deal, the proposed job price is regarded as actual job price/value.",BM1,,,,Job Price
+24,Estimated job price,"Price estimated while a Request is being submitted. It is estimated by looking at past proposed job price. If there is no data related to the corresponding service, it takes pre-defined default estimated price for each country. ",BM1,,,,Estimated Price
+25,Won job,The job that pro and consumer agreed to work together / The status of the Request when the consumers chooses a quote from a pro,all,,,,"Job deal, Hire"
+26,Winner,"The pro that has been choosen by a consumer to do the job, winner pro of the won job. There can be only one winner of a single Request.","BM1,BM2",,,,Hired
+27,Fulfilled job,The job when its appointment date passed or it is rated by the consumer,"BM1,BM2",,,,
+28,Welcome match,The system that provides new signed up pros with a number of opportunities that match their profile. The scope is making pros understand how the platform works and pushing them to purchase their first pack. It happens without any pro's interaction,BM1,,,,Welcome Dispatch
+29,Instant match,The system that produces matches for pros having a low number of opportunities. The aim is to increase the involvement of pros by giving them enough matches to quote. Pros can Request to receive the Instant Match,BM1,,,,
+30,Resurrection match,The portion of the matching algorithm that aims at reactivating pros who became inactive,BM1,,,,
+31,Claim,"Refers to the action of a pro accepting a job opportunity. Matched pros receive job opportunities and can claim it if they wish to take it on. Only one pro can claim a job opporutunity, so the first to claim it wins it",BM2,,,,
+32,Job status,"Current status of any Request followed by ids: Request, approved Request, quoted, won, reviewed. This list is a non-exhaustive example: JobRequestIsNotFinished = 1,ReceivingQuotes = 2,QuoteReceived = 3,AppointmentSet = 4,JobOccurred = 5,Reviewed = 8,Cancelled = 9,NoQuoteReceived = 10,PleaseSelectQuote = 11,QuoteReceivedButNoSelected = 12",all,Request Status,,,
+33,Fixed-term subscription,"Only applicable for Cleaning services in Turkiye. An option in the Request creation funnel for which the consumer commits to a pre-defined number of jobs encounters within a certain period at discounted prices per job. Once a consumer selects this option, their future jobs for that subscription are automatically scheduled according to the selected frequency. The consumer is charged a fee if they cancel before the completion of the subscription (e.g., 6-month or 3-month subscriptions for home cleaning services)",BM2,,,,
+34,Unclaim,"The action is triggered when a provider clicks the 'Can’t go to the job' button to undo the claim action. When a job opportunity is unclaimed, the opportunity is sent to other providers",BM2,,,,
+35,Pro earning,Indicates the amount that will be transferred to the provider within 3 days after the Request is fulfilled.,BM2,,,,
+36,Appointment,"Used for Pros and internally to indicate that the opportunity is claimed, and an appointment is now scheduled in the provider's calendars in BM2 model",BM2,,,,
+37,Flexible subscription,"One of the three subscriptions (3 months, 6 months, and unlimited) indicates Requests that are created by the system repetitively, and there is no commitment on the consumer's end. This means the consumer can cancel without a fee, and Armut does not set discounted job prices.",BM2,,,,
+38,Pro dashboard,"The dedicated area for logged-in pros where they can access and manage all aspects of their job opportunities. It allows professionals to interact with and engage in tasks related to each job. It includes: 
+for BM1 pros:
+• Opportunities section, where they can find the newly matched jobs opportunities, 
+• Quotes in which they will find all the jobs they decided to send a quote to,
+• Won jobs section, where they will find all the jobs they got selected to do from consumers.
+
+for BM2 pros:
+• Opportunities section, where they can find the newly matched jobs, 
+• Appointments in which they will find all the jobs they claimed.",all,,,,
+39,Cancelled Request,The Request that is cancelled by the Consumer or by Admin (has jobstatusid=9 in database),all,,,,
+40,Quote message,"Message the Pro has to write to quote a Request. It includes:
+- price of the quote
+- message
+- attachment (eventual pictures or pdf files they want to share with consumers. Not mandatory)",BM1,,,,
+41,Consumer Dashboard,"The dedicated area for logged-in consumers where they can access and manage their Requests and see suggested/highlighted services to create a new job for. It includes:
+ • My jobs list, were they can find their active jobs and interact with them to access the details, be informed on their status and perform actions on them (e.g.deleting it, expand it to see the details, leave a review...)
+• Old jobs list, were they can find the history of all jobs they ever opened on the platform.",all,,,,
+42,Quote model,"Business model where consumer's Request is matched with pros, sent them as opportunities and they can send quotes to the Request owner by paying lead fee",BM1,,,,
+43,One Time Request,A single request created by the consumer for a one-time service.,BM2,,,,
+44,Repeat Request,Requests are created by the system according to the frequency chosen by the consumer. All subscriptions are repeat Requests,BM2,,,,
+45,Contact Preference,"Step in the request creation flow in which a consumer can decide how they prefer being contacted by pros. The options are:
+1. Pros who quote can call
+2. Pros who quote can call but keep my phone number private (only for Armut product)
+3. I don't want to be called, send quotes via message",all,,,,
+46,Security screening,"The process of validating customers identity and documents regarding to the service they provided, to assure experience and pro quality within the platform. Mostly operated for our pros",all,,,,
+47,Book now model,Business model where consumers submit a reservation by paying with their credit card and we match the request with available pros. Pros check the job opportunities and only one can claim if they are interested. We collect commission from the consumer's payment and pros get the remaining as their earning.,BM2,,,,
+48,No show,"The situation and jobstatus that consumer face in Book Now when a Pro claimed a job opportunity but did not fulfill it, without notifying Armut and consumer",BM2,,,,
+49,Pro not found,The situation and jobstatus when no professional claims the job opportunity. The sum of both unclaimed and not claimed.,BM2,,,,
+50,Request Verification,The combined process of validation and approval. A verified Request is a Request that is validated and approved. ,all,Job Verification,,,
+51,Dynamic Pricing,The BM2 pricing algorithm calculates request segment prices based on the FR (Fulfillment Rate) of each segment and the target FR. The algorithm operates periodically,BM2,,,,
+52,Job Segments,Combination of the answers given by the Consumer that define a specific Job to be done,all,Request Segments,,,
+53,Auto Claim,"For repeat requests, if the rating given to the previous provider is greater than 2 stars, we automatically assign it to the same pro without initiating notifications or requesting other pros to claim the opportunity",BM2,,,,
+54,Involuntary cancellations,Cancellations that happen because of no show or Pro not found situations,BM2,,,,
+55,Rescheduling,Consumers can reschedule their jobs on the app until there are more than 2 hours to the job by changing jobstarttime,BM2,,,,
+56,Balance,"The amount of money pros add to their Balances in local currency, used to pay for lead prices to quote for the opportunities",BM1,,,,
+57,Subscription first Request,It indicates the first time Request for a Consumer in subscription,BM2,,,,
