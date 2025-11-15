@@ -9,12 +9,14 @@ interface TextFieldScreenProps {
   onNext: () => void;
   onBack: () => void;
   onClose: () => void;
+  serviceName?: string;
 }
 
 export const TextFieldScreen: React.FC<TextFieldScreenProps> = ({
   onNext,
   onBack,
   onClose,
+  serviceName = "House painting",
 }) => {
   const [notes, setNotes] = useState("");
 
@@ -153,7 +155,7 @@ export const TextFieldScreen: React.FC<TextFieldScreenProps> = ({
     <div className="relative w-full max-w-md flex flex-col min-h-screen">
       {/* Header */}
       <Header
-        title="House painting"
+        title={serviceName}
         onBackClick={handleBackClick}
         onCloseClick={handleCloseClick}
       />
@@ -171,7 +173,7 @@ export const TextFieldScreen: React.FC<TextFieldScreenProps> = ({
         <form onSubmit={handleSubmit} className="flex flex-col flex-grow pb-24">
           <div className="px-6 pt-6 pb-4">
             <h1 className="text-xl font-semibold text-[#0e0f11] leading-7">
-              What else should the painter know/pay attention to?
+              What else should the service provider know/pay attention to?
             </h1>
           </div>
 

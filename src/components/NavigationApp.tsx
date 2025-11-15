@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Homepage } from "./Homepage";
 import { SearchPage } from "./SearchPage";
 import { RadioButtonScreen } from "./RadioButtonScreen";
 import { CheckboxScreen } from "./CheckboxScreen";
 import { TextFieldScreen } from "./TextFieldScreen";
+import { DynamicQuestionScreen } from "./DynamicQuestionScreen";
+import { getQuestionsForService, ServiceQuestion } from "../utils/serviceQuestionsParser";
 
 export type ScreenType =
   | "homepage"
@@ -11,6 +13,7 @@ export type ScreenType =
   | "radio"
   | "checkbox"
   | "text"
+  | "question"
   | "notifications"
   | "jobs"
   | "settings";
@@ -24,19 +27,42 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
   currentScreen,
   onScreenChange,
 }) => {
+  // State for request creation flow
+  const [selectedServiceId, setSelectedServiceId] = useState<number | null>(null);
+  const [selectedServiceName, setSelectedServiceName] = useState<string>("");
+  const [questions, setQuestions] = useState<ServiceQuestion[]>([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
+  const [answers, setAnswers] = useState<Record<number, string | string[]>>({});
+
+  // Load questions when service is selected
+  useEffect(() => {
+    if (selectedServiceId !== null) {
+      const serviceQuestions = getQuestionsForService(selectedServiceId);
+      setQuestions(serviceQuestions);
+      setCurrentQuestionIndex(0);
+      setAnswers({});
+    }
+  }, [selectedServiceId]);
+
   const handleBack = () => {
     switch (currentScreen) {
       case "search":
         onScreenChange("homepage");
         break;
-      case "radio":
-        onScreenChange("search");
-        break;
-      case "checkbox":
-        onScreenChange("radio");
+      case "question":
+        if (currentQuestionIndex > 0) {
+          setCurrentQuestionIndex(currentQuestionIndex - 1);
+        } else {
+          onScreenChange("search");
+        }
         break;
       case "text":
-        onScreenChange("checkbox");
+        if (questions.length > 0) {
+          setCurrentQuestionIndex(questions.length - 1);
+          onScreenChange("question");
+        } else {
+          onScreenChange("search");
+        }
         break;
       case "homepage":
       default:
@@ -46,14 +72,49 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
     }
   };
 
-  const handleServiceSelect = (serviceName: string) => {
+  const handleServiceSelect = (serviceName: string, serviceId: string) => {
+    const serviceIdNum = parseInt(serviceId, 10);
     console.log(
-      `NavigationApp: Selected service: ${serviceName}, changing to radio screen`
+      `NavigationApp: Selected service: ${serviceName} (ID: ${serviceIdNum})`
     );
-    onScreenChange("radio");
+    setSelectedServiceId(serviceIdNum);
+    setSelectedServiceName(serviceName);
+    
+    const serviceQuestions = getQuestionsForService(serviceIdNum);
+    if (serviceQuestions.length > 0) {
+      setQuestions(serviceQuestions);
+      setCurrentQuestionIndex(0);
+      setAnswers({});
+      onScreenChange("question");
+    } else {
+      // If no questions, go directly to notes screen
+      onScreenChange("text");
+    }
+  };
+
+  const handleQuestionAnswer = (answer: string | string[]) => {
+    const currentQuestion = questions[currentQuestionIndex];
+    setAnswers({
+      ...answers,
+      [currentQuestion.controlOrder]: answer,
+    });
+
+    // Move to next question or notes screen
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      // All questions answered, go to notes screen
+      onScreenChange("text");
+    }
   };
 
   const handleClose = () => {
+    // Reset state
+    setSelectedServiceId(null);
+    setSelectedServiceName("");
+    setQuestions([]);
+    setCurrentQuestionIndex(0);
+    setAnswers({});
     onScreenChange("homepage");
   };
 
@@ -96,10 +157,43 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
             onClose={handleClose}
           />
         );
+      case "question":
+        if (questions.length === 0 || currentQuestionIndex >= questions.length) {
+          // No questions or out of bounds, go to notes
+          return (
+            <TextFieldScreen
+              serviceName={selectedServiceName || "Service"}
+              onNext={() => {
+                console.log("Form completed!", answers);
+                handleClose();
+              }}
+              onBack={handleBack}
+              onClose={handleClose}
+            />
+          );
+        }
+        const currentQuestion = questions[currentQuestionIndex];
+        const previousAnswer = answers[currentQuestion.controlOrder];
+        return (
+          <DynamicQuestionScreen
+            question={currentQuestion}
+            serviceName={selectedServiceName}
+            questionIndex={currentQuestionIndex}
+            totalQuestions={questions.length}
+            onNext={handleQuestionAnswer}
+            onBack={handleBack}
+            onClose={handleClose}
+            previousAnswer={previousAnswer}
+          />
+        );
       case "text":
         return (
           <TextFieldScreen
-            onNext={() => console.log("Form completed!")}
+            serviceName={selectedServiceName || "Service"}
+            onNext={() => {
+              console.log("Form completed!", answers);
+              handleClose();
+            }}
             onBack={handleBack}
             onClose={handleClose}
           />

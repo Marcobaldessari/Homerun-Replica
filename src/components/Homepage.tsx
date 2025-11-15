@@ -5,7 +5,7 @@ import { BottomNavigation } from "./BottomNavigation";
 
 interface HomepageProps {
   onSearch: () => void;
-  onServiceClick: (serviceName: string) => void;
+  onServiceClick: (serviceName: string, serviceId: string) => void;
   currentScreen: string;
   onNavigate: (screen: string) => void;
 }
@@ -21,9 +21,9 @@ export const Homepage: React.FC<HomepageProps> = ({
     onSearch();
   };
 
-  const handleServiceClick = (serviceName: string) => {
-    console.log("Homepage: handleServiceClick called with:", serviceName);
-    onServiceClick(serviceName);
+  const handleServiceClick = (serviceName: string, serviceId: string) => {
+    console.log("Homepage: handleServiceClick called with:", serviceName, serviceId);
+    onServiceClick(serviceName, serviceId);
   };
 
   return (

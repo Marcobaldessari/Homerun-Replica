@@ -111,5 +111,5 @@ To be implemented.
 
 If you read this whole thing, state:
 
-- your purpose and the context document you have access to
+- Your purpose and the context document you have access to
 - "I'm ready to cook, what feature would you like to prototype?"

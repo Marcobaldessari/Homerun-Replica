@@ -3,7 +3,7 @@ import { ServiceRow } from "./ServiceRow";
 import homepageServicesData from "../data/homepageServices.json";
 
 interface ServiceCategoriesProps {
-  onServiceClick: (serviceName: string) => void;
+  onServiceClick: (serviceName: string, serviceId: string) => void;
 }
 
 const CDN_BASE_URL = "https://cdn.armut.com/images/services/";

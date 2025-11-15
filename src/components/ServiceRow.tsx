@@ -10,7 +10,7 @@ export interface Service {
 export interface ServiceRowProps {
   categoryName: string;
   services: Service[];
-  onServiceClick: (serviceName: string) => void;
+  onServiceClick: (serviceName: string, serviceId: string) => void;
 }
 
 export const ServiceRow: React.FC<ServiceRowProps> = ({
@@ -101,7 +101,7 @@ export const ServiceRow: React.FC<ServiceRowProps> = ({
               key={service.id}
               name={service.name}
               image={service.image}
-              onClick={() => onServiceClick(service.name)}
+              onClick={() => onServiceClick(service.name, service.id)}
             />
           ))}
         </div>

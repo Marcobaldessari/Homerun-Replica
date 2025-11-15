@@ -1,0 +1,93 @@
+CONTROLTYPEID,CONTROLSERVICEID,LABEL,CONTROLORDER,REQUIRED,DESCRIPTION
+6,169,What type of painting project do you need done?,0,true,
+6,169,Should the ceiling be painted?,1,true,
+6,505,"How big is your move?
+",0,true,
+6,505,Do you need help with packing?,1,true,
+6,505,Will we use the stairs or a lift at the loading point?,2,true,
+6,505,How about at the location you are moving to?,3,true,
+6,1522,What type of sofa?,0,true,
+6,1522,Pick up floor?,1,true,
+6,1522,Delivery floor?,2,true,
+6,1694,What type of flat renovation do you need?,0,true,
+5,1694,What kinds of renovation work are you planning?,1,true,Please select all that apply
+6,1808,What is your web design requirement?,0,true,
+6,1808,What type of website?,1,true,
+6,1808,"What type of business is this for?
+",2,true,
+6,1808,What is your estimated budget for this project?,3,true,
+6,1819,"How big is your move?
+",0,true,
+6,1819,Do you need help with packing?,1,true,
+6,1819,Will we use the stairs or a lift at the loading point?,2,true,
+6,1819,How about at the location you are moving to?,3,true,
+6,1956,What type of event do you need the photographer for?,0,true,
+6,2710,"How big is your move?
+",0,true,
+6,2768,How many bedroom(s) are there?,0,true,
+6,2768,How many bathroom(s)?,1,true,
+5,2768,What additional service(s) would you like?,2,false,
+6,4098,How large will be the flooring area in square meters?,0,true,Please select the nearest option
+6,4098,How many rooms would you like fitted with laminate flooring?,1,true,
+6,4098,Do you need the pro to provide the flooring?,2,true,
+6,4098,Will old flooring or carpet need to be removed?,3,true,
+6,4144,How many bedroom(s) are there?,0,true,
+6,4144,How many bathroom(s)?,1,true,
+5,4144,What additional service(s) would you like?,2,false,
+6,4146,How many bedroom(s) are there?,0,true,
+6,4146,How many bathroom(s)?,1,true,
+5,4146,What additional service(s) would you like?,2,false,
+5,4592,What type of rubbish do you want to have removed?,0,true,Please select all options that apply
+6,4600,How big is the TV?,0,true,Diagonal size in inches (please select the nearest)
+6,4600,Do you need the pro to provide the wall mount?,1,true,
+6,4666,Which logo design service are you looking for?,0,true,
+6,4666,How will this logo be used?,1,true,
+5,4666,Do you need additional services?,2,false,
+6,6920,How many hours do you need the birthday photographer for?,0,true,
+6,7357,How many beds require assembly?,0,true,
+6,7357,Which type of bed assembly service do you need?,1,true,
+6,7360,How many doors does the wardrobe / do the wardrobes have in total?,0,true,
+5,7379,Which furniture(s) do you need assembled?,0,true,Please select all that apply
+6,7379,How many pieces of IKEA furniture need to be assembled?,1,true,
+6,8728,What type of fridge are you moving?,0,true,
+6,16319,What do you need to move?,0,true,
+6,16319,Do you need help with packing?,1,true,
+6,16319,Will we use the stairs or a lift at the loading point?,2,true,
+6,16319,How about at the location you are moving to?,3,true,
+6,16322,Which painter and decorator service do you need?,0,true,
+6,16322,How many rooms would you like painted and decorated?,1,true,"E.g., bedrooms, living room, kitchen, etc.
+"
+6,16322,What type of property is this for?,2,true,
+6,16323,What needs plastering?,0,true,
+6,16325,How many rooms would you like fitted with carpet?,0,true,
+6,16325,Do you need the pro to provide the carpet?,1,true,
+6,16325,Do you need underlay and grippers?,2,true,
+6,16325,Will old carpet or flooring need to be removed?,3,true,
+6,16325,What type of property is this for?,4,true,
+6,30765,How large will be the flooring area in square meters?,0,true,Please select the nearest option
+6,30765,How many rooms would you like fitted with laminate flooring?,1,true,
+6,30765,Do you need the pro to provide the flooring?,2,true,
+6,30765,Will old flooring or carpet need to be removed?,3,true,
+6,33653,"How big is your move?
+",0,true,
+6,33653,Do you need help with packing?,1,true,
+6,33653,Will we use the stairs or a lift at the loading point?,2,true,
+6,33653,How about at the location you are moving to?,3,true,
+6,49105,How many bedroom(s) are there?,0,true,
+6,49105,How many bathroom(s)?,1,true,
+5,49105,What additional service(s) would you like?,2,false,You can select more than one or skip without selecting
+6,49105,Are there carpets that need professional cleaning?,3,true,
+6,58555,How large is the area to be tiled?,0,true,Please select the nearest option
+6,63743,How large will be the wood flooring area in square meters?,0,true,Please select the nearest option
+6,63743,How many rooms would you like fitted with wood flooring?,1,true,
+6,63743,What type of wood flooring will be installed?,2,true,
+6,63743,Will old flooring or carpet need to be removed?,3,true,
+6,63743,Do you need the pro to provide the flooring?,4,true,
+6,71931,How many bedroom(s) are there?,0,true,
+6,71931,How many bathroom(s)?,1,true,
+5,71931,What additional service(s) would you like?,2,false,
+6,72936,How many bedroom(s) are there?,0,true,
+6,72936,How many bathroom(s)?,1,true,
+5,72936,What additional service(s) would you like?,2,false,
+6,80152,How big is the TV?,0,true,Diagonal size in inches (please select the nearest)
+6,80152,Do you need the pro to provide the wall mount?,1,true,
