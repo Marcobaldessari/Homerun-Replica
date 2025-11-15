@@ -5,6 +5,7 @@ import { PriceRange } from "./PriceRange";
 import { CTA } from "./CTA";
 import { SeasonalityBanner } from "./SeasonalityBanner";
 import { ServiceQuestion } from "../utils/serviceQuestionsParser";
+import { getAnswerOptionsForQuestion } from "../utils/serviceAnswersParser";
 
 interface DynamicQuestionScreenProps {
   question: ServiceQuestion;
@@ -48,66 +49,54 @@ export const DynamicQuestionScreen: React.FC<DynamicQuestionScreenProps> = ({
   };
 
   // For radio buttons
-  const [selectedRadio, setSelectedRadio] = useState<string | null>(getInitialRadio());
-  
+  const [selectedRadio, setSelectedRadio] = useState<string | null>(
+    getInitialRadio()
+  );
+
   // For checkboxes
-  const [selectedCheckboxes, setSelectedCheckboxes] = useState<Set<string>>(getInitialCheckboxes());
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState<Set<string>>(
+    getInitialCheckboxes()
+  );
 
   // Update state when previousAnswer changes (e.g., when navigating back)
   useEffect(() => {
     if (isRadio) {
-      const newValue = previousAnswer && typeof previousAnswer === "string" ? previousAnswer : null;
+      const newValue =
+        previousAnswer && typeof previousAnswer === "string"
+          ? previousAnswer
+          : null;
       setSelectedRadio(newValue);
     } else if (isCheckbox) {
-      const newValue = previousAnswer && Array.isArray(previousAnswer) ? new Set(previousAnswer) : new Set();
+      const newValue =
+        previousAnswer && Array.isArray(previousAnswer)
+          ? new Set<string>(previousAnswer)
+          : new Set<string>();
       setSelectedCheckboxes(newValue);
     }
   }, [previousAnswer, question.controlOrder, isRadio, isCheckbox]);
 
-  // Generate default options if none provided
-  // This is a placeholder - in production, options should come from a data source
-  const getDefaultOptions = (): string[] => {
-    if (options.length > 0) return options;
-    
-    // Try to infer options from question label
-    const label = question.label.toLowerCase();
-    
-    if (label.includes("bedroom")) {
-      return ["1", "2", "3", "4", "5+"];
+  // Get options from CSV, fallback to provided options or defaults
+  const getQuestionOptions = (): string[] => {
+    // First try to get from CSV
+    const csvOptions = getAnswerOptionsForQuestion(
+      question.controlServiceId,
+      question.controlOrder
+    );
+
+    if (csvOptions.length > 0) {
+      return csvOptions;
     }
-    if (label.includes("bathroom")) {
-      return ["1", "2", "3", "4+"];
+
+    // Fallback to provided options
+    if (options.length > 0) {
+      return options;
     }
-    if (label.includes("room")) {
-      return ["1", "2", "3", "4", "5+"];
-    }
-    if (label.includes("floor") || label.includes("lift")) {
-      return ["Ground floor", "1st floor", "2nd floor", "3rd floor", "4th floor", "5th floor+"];
-    }
-    if (label.includes("square meter") || label.includes("area")) {
-      return ["20", "50", "60", "100", "120", "150", "180", "200", "300", "500"];
-    }
-    if (label.includes("tv") || label.includes("television")) {
-      return ["32\"", "40\"", "43\"", "50\"", "55\"", "65\"", "75\"+"];
-    }
-    if (label.includes("bed")) {
-      return ["1", "2", "3", "4+"];
-    }
-    if (label.includes("door")) {
-      return ["1", "2", "3", "4", "5+"];
-    }
-    if (label.includes("piece") || label.includes("furniture")) {
-      return ["1", "2", "3", "4", "5", "6+"];
-    }
-    if (label.includes("hour")) {
-      return ["1", "2", "3", "4", "5", "6+"];
-    }
-    
-    // Default yes/no options
+
+    // Last resort: default yes/no
     return ["Yes", "No"];
   };
 
-  const questionOptions = getDefaultOptions();
+  const questionOptions = getQuestionOptions();
   const progressValue = ((questionIndex + 1) / (totalQuestions + 1)) * 100; // +1 for notes screen
 
   const handleNextClick = () => {
@@ -179,7 +168,9 @@ export const DynamicQuestionScreen: React.FC<DynamicQuestionScreenProps> = ({
             {question.label}
           </h2>
           {question.description && (
-            <p className="text-sm text-[#6a7482] mt-2">{question.description}</p>
+            <p className="text-sm text-[#6a7482] mt-2">
+              {question.description}
+            </p>
           )}
         </div>
         <div className="px-6">
@@ -242,11 +233,12 @@ export const DynamicQuestionScreen: React.FC<DynamicQuestionScreenProps> = ({
       </div>
 
       {/* CTA */}
-      <CTA 
+      <CTA
         onClick={handleNextClick}
         disabled={
-          question.required && 
-          ((isRadio && !selectedRadio) || (isCheckbox && selectedCheckboxes.size === 0))
+          question.required &&
+          ((isRadio && !selectedRadio) ||
+            (isCheckbox && selectedCheckboxes.size === 0))
         }
       >
         Next
@@ -259,4 +251,3 @@ export const DynamicQuestionScreen: React.FC<DynamicQuestionScreenProps> = ({
     </div>
   );
 };
-
