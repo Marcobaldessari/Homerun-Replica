@@ -3,8 +3,9 @@ import React from "react";
 interface FormHeaderProps {
   title: string;
   onBackClick?: () => void;
-  onCloseClick: () => void;
+  onCloseClick?: () => void;
   showBackButton?: boolean;
+  showCloseButton?: boolean;
 }
 
 export const Header: React.FC<FormHeaderProps> = ({
@@ -12,6 +13,7 @@ export const Header: React.FC<FormHeaderProps> = ({
   onBackClick,
   onCloseClick,
   showBackButton = true,
+  showCloseButton = true,
 }) => {
   return (
     <div className="bg-white px-4 py-3">
@@ -32,12 +34,16 @@ export const Header: React.FC<FormHeaderProps> = ({
           {title}
         </h1>
         <div className="flex justify-end w-6">
-          <button
-            onClick={onCloseClick}
-            className="text-gray-600 hover:text-gray-800"
-          >
-            ✕
-          </button>
+          {showCloseButton && onCloseClick ? (
+            <button
+              onClick={onCloseClick}
+              className="text-gray-600 hover:text-gray-800"
+            >
+              ✕
+            </button>
+          ) : (
+            <span className="invisible">✕</span>
+          )}
         </div>
       </div>
     </div>

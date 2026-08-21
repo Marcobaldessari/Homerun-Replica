@@ -32,6 +32,8 @@ export const DynamicQuestionScreen: React.FC<DynamicQuestionScreenProps> = ({
 }) => {
   const isRadio = question.controlTypeId === 6;
   const isCheckbox = question.controlTypeId === 5;
+  const isQuantity = question.controlTypeId === 7;
+  const isText = question.controlTypeId === 8;
 
   // Initialize state from previous answer if available
   const getInitialRadio = (): string | null => {
@@ -48,6 +50,21 @@ export const DynamicQuestionScreen: React.FC<DynamicQuestionScreenProps> = ({
     return new Set();
   };
 
+  const getInitialQuantity = (): number => {
+    if (previousAnswer && typeof previousAnswer === "string") {
+      const parsed = parseInt(previousAnswer, 10);
+      if (!isNaN(parsed)) return parsed;
+    }
+    return 0;
+  };
+
+  const getInitialText = (): string => {
+    if (previousAnswer && typeof previousAnswer === "string") {
+      return previousAnswer;
+    }
+    return "";
+  };
+
   // For radio buttons
   const [selectedRadio, setSelectedRadio] = useState<string | null>(
     getInitialRadio()
@@ -57,6 +74,12 @@ export const DynamicQuestionScreen: React.FC<DynamicQuestionScreenProps> = ({
   const [selectedCheckboxes, setSelectedCheckboxes] = useState<Set<string>>(
     getInitialCheckboxes()
   );
+
+  // For quantity stepper
+  const [quantity, setQuantity] = useState<number>(getInitialQuantity());
+
+  // For short text input
+  const [textValue, setTextValue] = useState<string>(getInitialText());
 
   // Update state when previousAnswer changes (e.g., when navigating back)
   useEffect(() => {
@@ -72,8 +95,20 @@ export const DynamicQuestionScreen: React.FC<DynamicQuestionScreenProps> = ({
           ? new Set<string>(previousAnswer)
           : new Set<string>();
       setSelectedCheckboxes(newValue);
+    } else if (isQuantity) {
+      const parsed =
+        previousAnswer && typeof previousAnswer === "string"
+          ? parseInt(previousAnswer, 10)
+          : 0;
+      setQuantity(isNaN(parsed) ? 0 : parsed);
+    } else if (isText) {
+      setTextValue(
+        previousAnswer && typeof previousAnswer === "string"
+          ? previousAnswer
+          : ""
+      );
     }
-  }, [previousAnswer, question.controlOrder, isRadio, isCheckbox]);
+  }, [previousAnswer, question.controlOrder, isRadio, isCheckbox, isQuantity, isText]);
 
   // Get options from CSV, fallback to provided options or defaults
   const getQuestionOptions = (): string[] => {
@@ -104,9 +139,13 @@ export const DynamicQuestionScreen: React.FC<DynamicQuestionScreenProps> = ({
       onNext(selectedRadio);
     } else if (isCheckbox && selectedCheckboxes.size > 0) {
       onNext(Array.from(selectedCheckboxes));
+    } else if (isQuantity) {
+      onNext(String(quantity));
+    } else if (isText && textValue.trim()) {
+      onNext(textValue.trim());
     } else if (!question.required) {
       // Allow proceeding if question is not required
-      onNext(isRadio ? "" : []);
+      onNext(isRadio || isText ? "" : []);
     }
   };
 
@@ -229,6 +268,37 @@ export const DynamicQuestionScreen: React.FC<DynamicQuestionScreenProps> = ({
               ))}
             </div>
           )}
+
+          {isQuantity && (
+            <div className="relative">
+              <select
+                value={quantity}
+                onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
+                className="w-full h-14 appearance-none bg-white border border-[#b8c0ca] rounded-lg px-4 pr-10 text-base text-[#0e0f11] focus:outline-none"
+              >
+                {Array.from({ length: 11 }, (_, n) => n).map((n) => (
+                  <option key={n} value={n}>
+                    {n}
+                  </option>
+                ))}
+              </select>
+              <img
+                src="/icons/ChevronDown.svg"
+                alt=""
+                className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-[7px]"
+              />
+            </div>
+          )}
+
+          {isText && (
+            <input
+              type="text"
+              value={textValue}
+              onChange={(e) => setTextValue(e.target.value)}
+              placeholder="Placeholder"
+              className="w-full h-14 px-4 border border-[#b8c0ca] rounded-lg text-base text-[#0e0f11] placeholder-[#b8c0ca] focus:outline-none"
+            />
+          )}
         </div>
       </div>
 
@@ -238,7 +308,8 @@ export const DynamicQuestionScreen: React.FC<DynamicQuestionScreenProps> = ({
         disabled={
           question.required &&
           ((isRadio && !selectedRadio) ||
-            (isCheckbox && selectedCheckboxes.size === 0))
+            (isCheckbox && selectedCheckboxes.size === 0) ||
+            (isText && !textValue.trim()))
         }
       >
         Next

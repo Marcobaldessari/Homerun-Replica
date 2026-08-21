@@ -1,7 +1,7 @@
 import serviceQuestionsCSV from "../data/serviceQuestions.csv?raw";
 
 export interface ServiceQuestion {
-  controlTypeId: number; // 6 = radio, 5 = checkbox
+  controlTypeId: number; // 6 = radio, 5 = checkbox, 7 = quantity stepper, 8 = short text
   controlServiceId: number; // matches serviceID in homepageServices.json
   label: string; // the question text
   controlOrder: number; // order in which question should appear

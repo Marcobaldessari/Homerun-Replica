@@ -1,4 +1,10 @@
-import React, { useState, useMemo, useCallback, useRef } from "react";
+import React, {
+  useState,
+  useMemo,
+  useCallback,
+  useRef,
+  useEffect,
+} from "react";
 import { Header } from "./FormHeader";
 import { ProgressBar } from "./ProgressBar";
 import { PriceRange } from "./PriceRange";
@@ -18,6 +24,7 @@ interface TextAreaInputProps {
   placeholder?: string;
   onMediaAttach?: () => void;
   onVoiceDictation?: () => void;
+  isRecording?: boolean;
 }
 
 const TextAreaInput: React.FC<TextAreaInputProps> = ({
@@ -26,6 +33,7 @@ const TextAreaInput: React.FC<TextAreaInputProps> = ({
   placeholder,
   onMediaAttach,
   onVoiceDictation,
+  isRecording = false,
 }) => {
   const { styles, validationMessage } = useMemo(() => {
     const charCount = value.length;
@@ -92,8 +100,14 @@ const TextAreaInput: React.FC<TextAreaInputProps> = ({
           <button
             type="button"
             onClick={onVoiceDictation}
-            className="flex items-center justify-center w-8 h-8 rounded-full bg-white border border-[#e3e5e8] hover:bg-[#f9fafa] transition-colors shadow-sm"
-            aria-label="Voice dictation"
+            className={`flex items-center justify-center w-8 h-8 rounded-full border transition-colors shadow-sm ${
+              isRecording
+                ? "bg-[#E1590E] border-[#E1590E]"
+                : "bg-white border-[#e3e5e8] hover:bg-[#f9fafa]"
+            }`}
+            aria-label={
+              isRecording ? "Stop voice dictation" : "Start voice dictation"
+            }
           >
             <svg
               width="16"
@@ -104,14 +118,14 @@ const TextAreaInput: React.FC<TextAreaInputProps> = ({
             >
               <path
                 d="M8 2C7.17157 2 6.5 2.67157 6.5 3.5V8C6.5 8.82843 7.17157 9.5 8 9.5C8.82843 9.5 9.5 8.82843 9.5 8V3.5C9.5 2.67157 8.82843 2 8 2Z"
-                stroke="#3A3F46"
+                stroke={isRecording ? "#FFFFFF" : "#3A3F46"}
                 strokeWidth="1.2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
               <path
                 d="M4 7.5C4 9.433 5.567 11 7.5 11H8.5C10.433 11 12 9.433 12 7.5M8 9.5V13.5M6 13.5H10"
-                stroke="#3A3F46"
+                stroke={isRecording ? "#FFFFFF" : "#3A3F46"}
                 strokeWidth="1.2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -157,6 +171,70 @@ const ExamplesSection: React.FC = () => (
   </div>
 );
 
+// Type definitions for Speech Recognition API
+interface SpeechRecognition extends EventTarget {
+  continuous: boolean;
+  interimResults: boolean;
+  lang: string;
+  start(): void;
+  stop(): void;
+  abort(): void;
+  onstart: ((this: SpeechRecognition, ev: Event) => any) | null;
+  onend: ((this: SpeechRecognition, ev: Event) => any) | null;
+  onresult:
+    | ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => any)
+    | null;
+  onerror:
+    | ((this: SpeechRecognition, ev: SpeechRecognitionErrorEvent) => any)
+    | null;
+}
+
+interface SpeechRecognitionEvent extends Event {
+  resultIndex: number;
+  results: SpeechRecognitionResultList;
+}
+
+interface SpeechRecognitionErrorEvent extends Event {
+  error: string;
+  message: string;
+}
+
+interface SpeechRecognitionResultList {
+  readonly length: number;
+  item(index: number): SpeechRecognitionResult;
+  [index: number]: SpeechRecognitionResult;
+}
+
+interface SpeechRecognitionResult {
+  readonly length: number;
+  readonly isFinal: boolean;
+  item(index: number): SpeechRecognitionAlternative;
+  [index: number]: SpeechRecognitionAlternative;
+}
+
+interface SpeechRecognitionAlternative {
+  readonly transcript: string;
+  readonly confidence: number;
+}
+
+declare var SpeechRecognition: {
+  prototype: SpeechRecognition;
+  new (): SpeechRecognition;
+};
+
+declare var webkitSpeechRecognition: {
+  prototype: SpeechRecognition;
+  new (): SpeechRecognition;
+};
+
+// Extend Window interface for SpeechRecognition
+declare global {
+  interface Window {
+    SpeechRecognition: typeof SpeechRecognition;
+    webkitSpeechRecognition: typeof SpeechRecognition;
+  }
+}
+
 export const TextFieldScreen: React.FC<TextFieldScreenProps> = ({
   onNext,
   onBack,
@@ -164,7 +242,10 @@ export const TextFieldScreen: React.FC<TextFieldScreenProps> = ({
   serviceName = "House painting",
 }) => {
   const [notes, setNotes] = useState("");
+  const [isRecording, setIsRecording] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const accumulatedTranscriptRef = useRef<string>("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -208,8 +289,99 @@ export const TextFieldScreen: React.FC<TextFieldScreenProps> = ({
   );
 
   const handleVoiceDictation = useCallback(() => {
-    // TODO: Implement voice dictation functionality
-    console.log("Voice dictation clicked");
+    // Check if SpeechRecognition is available
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      alert(
+        "Speech recognition is not supported in your browser. Please use Chrome or Edge."
+      );
+      return;
+    }
+
+    if (isRecording) {
+      // Stop recording
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+        recognitionRef.current = null;
+      }
+      setIsRecording(false);
+      return;
+    }
+
+    // Start recording
+    try {
+      const recognition = new SpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      recognition.lang = "en-US"; // You can change this to support other languages
+
+      recognition.onstart = () => {
+        setIsRecording(true);
+        accumulatedTranscriptRef.current = notes; // Store current notes as base
+      };
+
+      recognition.onresult = (event: SpeechRecognitionEvent) => {
+        let interimTranscript = "";
+        let finalTranscript = "";
+
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          const transcript = event.results[i][0].transcript;
+          if (event.results[i].isFinal) {
+            finalTranscript += transcript + " ";
+          } else {
+            interimTranscript += transcript;
+          }
+        }
+
+        // Update accumulated final transcript
+        if (finalTranscript) {
+          accumulatedTranscriptRef.current += finalTranscript;
+        }
+
+        // Update the textarea with accumulated final transcript + current interim
+        const newText = accumulatedTranscriptRef.current + interimTranscript;
+        setNotes(newText);
+      };
+
+      recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
+        console.error("Speech recognition error:", event.error);
+        if (event.error === "not-allowed") {
+          alert(
+            "Microphone permission denied. Please allow microphone access."
+          );
+        } else if (event.error === "no-speech") {
+          console.log("No speech detected");
+        }
+        setIsRecording(false);
+        recognitionRef.current = null;
+      };
+
+      recognition.onend = () => {
+        setIsRecording(false);
+        recognitionRef.current = null;
+        // Ensure final transcript is saved
+        setNotes(accumulatedTranscriptRef.current);
+      };
+
+      recognitionRef.current = recognition;
+      recognition.start();
+    } catch (error) {
+      console.error("Error starting speech recognition:", error);
+      alert("Failed to start voice dictation. Please try again.");
+      setIsRecording(false);
+    }
+  }, [isRecording, notes]);
+
+  // Cleanup: stop recording when component unmounts
+  useEffect(() => {
+    return () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+        recognitionRef.current = null;
+      }
+    };
   }, []);
 
   return (
@@ -245,6 +417,7 @@ export const TextFieldScreen: React.FC<TextFieldScreenProps> = ({
               placeholder="Write more details"
               onMediaAttach={handleMediaAttach}
               onVoiceDictation={handleVoiceDictation}
+              isRecording={isRecording}
             />
             <input
               ref={fileInputRef}
@@ -261,7 +434,14 @@ export const TextFieldScreen: React.FC<TextFieldScreenProps> = ({
           </div>
         </form>
 
-        <CTA onClick={() => handleSubmit({} as React.FormEvent)}>Next</CTA>
+        <CTA
+          onClick={() => {
+            console.log("Form submitted with notes:", notes);
+            onNext();
+          }}
+        >
+          Next
+        </CTA>
       </div>
 
       {/* Home indicator */}

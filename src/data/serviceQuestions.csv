@@ -6,6 +6,7 @@ CONTROLTYPEID,CONTROLSERVICEID,LABEL,CONTROLORDER,REQUIRED,DESCRIPTION
 6,505,Do you need help with packing?,1,true,
 6,505,Will we use the stairs or a lift at the loading point?,2,true,
 6,505,How about at the location you are moving to?,3,true,
+7,505,How many large pieces of furniture do you have?,4,true,"TV unit, table, bed, sofa, armchair, library etc."
 6,1522,What type of sofa?,0,true,
 6,1522,Pick up floor?,1,true,
 6,1522,Delivery floor?,2,true,
@@ -50,6 +51,7 @@ CONTROLTYPEID,CONTROLSERVICEID,LABEL,CONTROLORDER,REQUIRED,DESCRIPTION
 5,7379,Which furniture(s) do you need assembled?,0,true,Please select all that apply
 6,7379,How many pieces of IKEA furniture need to be assembled?,1,true,
 6,8728,What type of fridge are you moving?,0,true,
+8,8728,Fridge brand/model?,1,false,"Samsung, LG, Bosch, etc."
 6,16319,What do you need to move?,0,true,
 6,16319,Do you need help with packing?,1,true,
 6,16319,Will we use the stairs or a lift at the loading point?,2,true,
