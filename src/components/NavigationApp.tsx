@@ -5,6 +5,11 @@ import { RadioButtonScreen } from "./RadioButtonScreen";
 import { CheckboxScreen } from "./CheckboxScreen";
 import { TextFieldScreen } from "./TextFieldScreen";
 import { DynamicQuestionScreen } from "./DynamicQuestionScreen";
+import { RequestFunnel } from "./RequestFunnel";
+import { ExitConfirmationModal } from "./ExitConfirmationModal";
+import { JobsArea } from "./JobsArea";
+import { SettingsArea } from "./SettingsArea";
+import { NotificationsGateScreen } from "./NotificationsGateScreen";
 import { getQuestionsForService, ServiceQuestion } from "../utils/serviceQuestionsParser";
 
 export type ScreenType =
@@ -14,6 +19,7 @@ export type ScreenType =
   | "checkbox"
   | "text"
   | "question"
+  | "funnel"
   | "notifications"
   | "jobs"
   | "settings";
@@ -33,6 +39,7 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
   const [questions, setQuestions] = useState<ServiceQuestion[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [answers, setAnswers] = useState<Record<number, string | string[]>>({});
+  const [showExitModal, setShowExitModal] = useState(false);
 
   // Load questions when service is selected
   useEffect(() => {
@@ -63,6 +70,9 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
         } else {
           onScreenChange("search");
         }
+        break;
+      case "funnel":
+        onScreenChange("text");
         break;
       case "homepage":
       default:
@@ -118,6 +128,18 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
     onScreenChange("homepage");
   };
 
+  // Ask for confirmation before actually closing the wizard.
+  const requestExit = () => setShowExitModal(true);
+  const exitVariant: "firstStep" | "midFlow" =
+    currentScreen === "question" && currentQuestionIndex === 0
+      ? "firstStep"
+      : "midFlow";
+  const handleExitConfirm = () => {
+    setShowExitModal(false);
+    handleClose();
+  };
+  const handleExitDismiss = () => setShowExitModal(false);
+
   const renderScreen = () => {
     switch (currentScreen) {
       case "homepage":
@@ -146,7 +168,7 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
           <RadioButtonScreen
             onNext={() => onScreenChange("checkbox")}
             onBack={handleBack}
-            onClose={handleClose}
+            onClose={requestExit}
           />
         );
       case "checkbox":
@@ -154,21 +176,18 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
           <CheckboxScreen
             onNext={() => onScreenChange("text")}
             onBack={handleBack}
-            onClose={handleClose}
+            onClose={requestExit}
           />
         );
-      case "question":
+      case "question": {
         if (questions.length === 0 || currentQuestionIndex >= questions.length) {
           // No questions or out of bounds, go to notes
           return (
             <TextFieldScreen
               serviceName={selectedServiceName || "Service"}
-              onNext={() => {
-                console.log("Form completed!", answers);
-                handleClose();
-              }}
+              onNext={() => onScreenChange("funnel")}
               onBack={handleBack}
-              onClose={handleClose}
+              onClose={requestExit}
             />
           );
         }
@@ -182,45 +201,51 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
             totalQuestions={questions.length}
             onNext={handleQuestionAnswer}
             onBack={handleBack}
-            onClose={handleClose}
+            onClose={requestExit}
             previousAnswer={previousAnswer}
           />
         );
+      }
       case "text":
         return (
           <TextFieldScreen
             serviceName={selectedServiceName || "Service"}
-            onNext={() => {
-              console.log("Form completed!", answers);
+            onNext={() => onScreenChange("funnel")}
+            onBack={handleBack}
+            onClose={requestExit}
+          />
+        );
+      case "funnel":
+        return (
+          <RequestFunnel
+            serviceName={selectedServiceName || "Service"}
+            answers={answers}
+            onComplete={() => {
+              console.log("Request created!", answers);
               handleClose();
             }}
             onBack={handleBack}
-            onClose={handleClose}
+            onClose={requestExit}
           />
         );
       case "notifications":
         return (
-          <Homepage
-            onSearch={() => onScreenChange("search")}
-            onServiceClick={handleServiceSelect}
+          <NotificationsGateScreen
             currentScreen={currentScreen}
             onNavigate={onScreenChange}
           />
         );
       case "jobs":
         return (
-          <Homepage
-            onSearch={() => onScreenChange("search")}
-            onServiceClick={handleServiceSelect}
+          <JobsArea
             currentScreen={currentScreen}
             onNavigate={onScreenChange}
+            onServiceClick={handleServiceSelect}
           />
         );
       case "settings":
         return (
-          <Homepage
-            onSearch={() => onScreenChange("search")}
-            onServiceClick={handleServiceSelect}
+          <SettingsArea
             currentScreen={currentScreen}
             onNavigate={onScreenChange}
           />
@@ -240,6 +265,13 @@ export const NavigationApp: React.FC<NavigationAppProps> = ({
   return (
     <div className="flex w-full min-h-screen bg-gray-100 justify-center">
       <div className="w-full max-w-md bg-white h-full">{renderScreen()}</div>
+      {showExitModal && (
+        <ExitConfirmationModal
+          variant={exitVariant}
+          onExit={handleExitConfirm}
+          onContinue={handleExitDismiss}
+        />
+      )}
     </div>
   );
 };
