@@ -63,7 +63,7 @@ export const MyProfileScreen: React.FC<MyProfileScreenProps> = ({
               <img
                 src="/icons/ChevronDown.svg"
                 alt=""
-                className="size-4 shrink-0 -rotate-90"
+                className="w-3 h-[7px] shrink-0 -rotate-90"
               />
             </button>
             {index < rows.length - 1 && (

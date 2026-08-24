@@ -147,7 +147,7 @@ export const LocationStep: React.FC<LocationStepProps> = ({
               <img
                 src="/icons/Checkmark.svg"
                 alt=""
-                className="w-4 h-4 mt-1 flex-shrink-0"
+                className="w-4 h-3 mt-1 flex-shrink-0"
               />
               <span className="text-sm text-[#0e0f11]">
                 {selectedAddress}

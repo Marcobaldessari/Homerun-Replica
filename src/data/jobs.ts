@@ -12,6 +12,8 @@ export interface Quote {
   reviewCount: number;
   priceLabel: string;
   message: string;
+  /** Unread messages from this pro, shown as a badge on their avatar in the job card. */
+  unreadCount?: number;
 }
 
 export interface JobAnswer {
@@ -94,6 +96,7 @@ export const jobs: Job[] = [
         reviewCount: 32,
         priceLabel: "69 TL",
         message: "Hello, the full quote is written above, let me know!",
+        unreadCount: 2,
       },
       {
         id: "quote-2",
@@ -112,8 +115,38 @@ export const jobs: Job[] = [
         reviewCount: 12,
         priceLabel: "80 TL",
         message: "The quote is made based on your description.",
+        unreadCount: 1,
       },
     ],
+  },
+  {
+    id: "job-6",
+    serviceName: "Garden Fencing",
+    createdDateLabel: "12 March 2024",
+    statusId: 4,
+    statusLabel: "You've selected a pro! They'll be in touch to confirm the details.",
+    dateTimeLabel: "Thursday, 28 March 2024 - 10:00",
+    location: "Highbury Ward, Islington, London",
+    contactPreferenceLabel: "They can call and see my number",
+    answers: [
+      { question: "What type of fence?", answer: "Wooden panel fence" },
+      { question: "How long is the fence?", answer: "Around 15 metres" },
+    ],
+    description:
+      "Replacing an old wooden fence along the back garden. Access is through a side gate, no parking restrictions.",
+    requestNumber: "21121901",
+    quotes: [
+      {
+        id: "quote-5",
+        proName: "Daniel Ashworth",
+        avatarUrl: "/avatars/DanielAshworth.png",
+        rating: 4.8,
+        reviewCount: 41,
+        priceLabel: "220 TL",
+        message: "Happy to take this on, I'll bring everything needed for the panel fence.",
+      },
+    ],
+    hiredQuoteId: "quote-5",
   },
   {
     id: "job-3",

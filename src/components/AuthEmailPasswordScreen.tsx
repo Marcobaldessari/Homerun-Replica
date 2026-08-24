@@ -114,13 +114,13 @@ export const AuthEmailPasswordScreen: React.FC<
               <button
                 type="button"
                 onClick={() => setShowPassword((prev) => !prev)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6"
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center"
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 <img
                   src="/icons/EyeShowPassword.svg"
                   alt=""
-                  className="w-6 h-6"
+                  className="w-6 h-[18px]"
                 />
               </button>
             </div>

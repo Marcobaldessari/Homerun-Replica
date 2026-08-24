@@ -100,9 +100,13 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
             type="button"
             onClick={onBack}
             aria-label="Back"
-            className="text-gray-600 hover:text-gray-800 shrink-0 w-8 h-8 flex items-center justify-center"
+            className="shrink-0 w-8 h-8 flex items-center justify-center"
           >
-            ←
+            <img
+              src="/69bc3e7016a8de92b9799edcf4448eb40f3c8fe2.svg"
+              alt=""
+              className="w-6 h-6"
+            />
           </button>
           <div className="flex items-center gap-2 flex-1 min-w-0">
             <img

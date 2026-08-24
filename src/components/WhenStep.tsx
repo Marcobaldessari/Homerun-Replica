@@ -113,7 +113,7 @@ const BottomSheet: React.FC<{
                   <img
                     src="/icons/Checkmark.svg"
                     alt=""
-                    className="w-4 h-4 flex-shrink-0"
+                    className="w-4 h-3 flex-shrink-0"
                   />
                 )}
               </button>
@@ -210,7 +210,7 @@ export const WhenStep: React.FC<WhenStepProps> = ({
                         <img
                           src="/icons/ChevronDown.svg"
                           alt=""
-                          className="w-4 h-4 flex-shrink-0"
+                          className="w-3 h-[7px] flex-shrink-0"
                         />
                       </button>
                     </div>
@@ -229,7 +229,7 @@ export const WhenStep: React.FC<WhenStepProps> = ({
                         <img
                           src="/icons/ChevronDown.svg"
                           alt=""
-                          className="w-4 h-4 flex-shrink-0"
+                          className="w-3 h-[7px] flex-shrink-0"
                         />
                       </button>
                     </div>

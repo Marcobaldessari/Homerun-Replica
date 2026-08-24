@@ -37,10 +37,10 @@ export const SearchPage: React.FC<SearchPageProps> = ({
       <div className="mt-2 px-4 flex items-center">
         <button
           onClick={onBack}
-          className="p-3 rounded-full"
+          className="p-3 rounded-full flex items-center justify-center"
           aria-label="Go back"
         >
-          <img src={backIconImg} alt="Back" className="w-4 h-4" />
+          <img src={backIconImg} alt="Back" className="w-6 h-6" />
         </button>
         <div className="ml-2 flex-1 relative">
           <input

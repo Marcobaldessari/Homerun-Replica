@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ACTIVE_STATUS_IDS, getQuoteById, Job } from "../data/jobs";
+import { ACTIVE_STATUS_IDS, getQuoteById, Job, Quote } from "../data/jobs";
 
 interface JobCardProps {
   job: Job;
@@ -34,7 +34,11 @@ const MenuDots: React.FC<{ onClick: () => void }> = ({ onClick }) => (
   </button>
 );
 
-const ProAvatar: React.FC<{ name: string; src: string }> = ({ name, src }) => {
+const ProAvatar: React.FC<{ name: string; src: string; unreadCount?: number }> = ({
+  name,
+  src,
+  unreadCount,
+}) => {
   const [errored, setErrored] = useState(false);
   const initials = name
     .split(" ")
@@ -45,18 +49,48 @@ const ProAvatar: React.FC<{ name: string; src: string }> = ({ name, src }) => {
     .toUpperCase();
 
   return (
-    <div className="relative flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#c6f1d1]">
-      {!errored ? (
-        <img
-          src={src}
-          alt={name}
-          className="absolute inset-0 size-full object-cover"
-          onError={() => setErrored(true)}
-        />
-      ) : (
-        <span className="text-[12px] font-semibold text-[#0e0f11]">
-          {initials}
+    <div className="relative size-10 shrink-0">
+      <div className="flex size-10 items-center justify-center overflow-hidden rounded-full bg-[#c6f1d1]">
+        {!errored ? (
+          <img
+            src={src}
+            alt={name}
+            className="size-full object-cover"
+            onError={() => setErrored(true)}
+          />
+        ) : (
+          <span className="text-[12px] font-semibold text-[#0e0f11]">
+            {initials}
+          </span>
+        )}
+      </div>
+      {!!unreadCount && (
+        <span className="absolute -bottom-0.5 -right-0.5 flex h-4 min-w-[16px] items-center justify-center rounded-lg bg-[#d71d36] px-1 text-[11px] leading-4 text-white">
+          {unreadCount}
         </span>
+      )}
+    </div>
+  );
+};
+
+const QuoteAvatarStack: React.FC<{ quotes: Quote[] }> = ({ quotes }) => {
+  const visible = quotes.slice(0, 4);
+  const overflow = quotes.length - visible.length;
+
+  return (
+    <div className="flex w-full items-start gap-1">
+      {visible.map((quote) => (
+        <ProAvatar
+          key={quote.id}
+          name={quote.proName}
+          src={quote.avatarUrl}
+          unreadCount={quote.unreadCount}
+        />
+      ))}
+      {overflow > 0 && (
+        <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#f0f1f2] text-xs font-semibold text-[#6a7482]">
+          +{overflow}
+        </div>
       )}
     </div>
   );
@@ -120,8 +154,9 @@ export const JobCard: React.FC<JobCardProps> = ({
             <p className="text-sm leading-[22px] text-[#6a7482]">
               {job.statusLabel}
             </p>
+            {job.quotes.length > 0 && <QuoteAvatarStack quotes={job.quotes} />}
             <CtaButton
-              label="See details"
+              label={job.quotes.length > 0 ? "See quotes" : "See details"}
               onClick={() => onSeeDetails(job.id)}
             />
           </>
