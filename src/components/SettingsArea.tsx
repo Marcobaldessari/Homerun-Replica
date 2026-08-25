@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BottomNavigation } from "./BottomNavigation";
 import { MyProfileScreen } from "./MyProfileScreen";
 import { ChangePasswordGateScreen } from "./ChangePasswordGateScreen";
+import { ChangePasswordScreen } from "./ChangePasswordScreen";
 import { NameSurnameEditScreen } from "./NameSurnameEditScreen";
 import { PhoneNumberEditScreen } from "./PhoneNumberEditScreen";
 import { AddressEditScreen } from "./AddressEditScreen";
@@ -163,7 +164,9 @@ export const SettingsArea: React.FC<SettingsAreaProps> = ({
   }
 
   if (view === "changePassword") {
-    return (
+    return user.hasPassword ? (
+      <ChangePasswordScreen onBack={() => setView("entrypoint")} />
+    ) : (
       <ChangePasswordGateScreen onBack={() => setView("entrypoint")} />
     );
   }
