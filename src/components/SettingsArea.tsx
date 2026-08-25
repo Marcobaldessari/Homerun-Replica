@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { BottomNavigation } from "./BottomNavigation";
 import { MyProfileScreen } from "./MyProfileScreen";
 import { ChangePasswordGateScreen } from "./ChangePasswordGateScreen";
+import { NameSurnameEditScreen } from "./NameSurnameEditScreen";
+import { PhoneNumberEditScreen } from "./PhoneNumberEditScreen";
+import { AddressEditScreen } from "./AddressEditScreen";
+import { CallPreferencesEditScreen } from "./CallPreferencesEditScreen";
 import { mockUser } from "../data/user";
 
 interface SettingsAreaProps {
@@ -9,7 +13,14 @@ interface SettingsAreaProps {
   onNavigate: (screen: string) => void;
 }
 
-type SettingsView = "entrypoint" | "profile" | "changePassword";
+type SettingsView =
+  | "entrypoint"
+  | "profile"
+  | "changePassword"
+  | "editName"
+  | "editPhone"
+  | "editAddress"
+  | "editCallPreferences";
 
 interface SettingsRowConfig {
   key: string;
@@ -58,13 +69,96 @@ export const SettingsArea: React.FC<SettingsAreaProps> = ({
   onNavigate,
 }) => {
   const [view, setView] = useState<SettingsView>("entrypoint");
+  const [user, setUser] = useState(mockUser);
+  const [toast, setToast] = useState<string | null>(null);
+
+  const showToast = (message: string) => {
+    setToast(message);
+    setTimeout(() => setToast(null), 3000);
+  };
+
+  const backToProfile = () => setView("profile");
+
+  if (view === "editName") {
+    return (
+      <NameSurnameEditScreen
+        name={user.name}
+        onBack={backToProfile}
+        onSave={(name) => {
+          setUser((prev) => ({ ...prev, name }));
+          setView("profile");
+          showToast("Your name and surname are updated successfully");
+        }}
+      />
+    );
+  }
+
+  if (view === "editPhone") {
+    return (
+      <PhoneNumberEditScreen
+        countryCode={user.countryCode}
+        phone={user.phone}
+        onBack={backToProfile}
+        onSave={(countryCode, phone) => {
+          setUser((prev) => ({ ...prev, countryCode, phone }));
+          setView("profile");
+          showToast("Your phone number is updated successfully");
+        }}
+      />
+    );
+  }
+
+  if (view === "editAddress") {
+    return (
+      <AddressEditScreen
+        address={user.address}
+        onBack={backToProfile}
+        onSave={(address) => {
+          setUser((prev) => ({
+            ...prev,
+            address,
+            location: `${address.city}, ${address.district}, ${address.neighborhood}`,
+          }));
+          setView("profile");
+          showToast("Your address is updated successfully");
+        }}
+      />
+    );
+  }
+
+  if (view === "editCallPreferences") {
+    return (
+      <CallPreferencesEditScreen
+        callPreference={user.callPreference}
+        onBack={backToProfile}
+        onSave={(callPreference) => {
+          setUser((prev) => ({ ...prev, callPreference }));
+          setView("profile");
+          showToast("Your contact preferences are updated");
+        }}
+      />
+    );
+  }
 
   if (view === "profile") {
     return (
-      <MyProfileScreen
-        user={mockUser}
-        onBack={() => setView("entrypoint")}
-      />
+      <>
+        <MyProfileScreen
+          user={user}
+          onBack={() => setView("entrypoint")}
+          onEditName={() => setView("editName")}
+          onEditPhone={() => setView("editPhone")}
+          onEditAddress={() => setView("editAddress")}
+          onEditCallPreferences={() => setView("editCallPreferences")}
+        />
+        {toast && (
+          <div className="fixed top-4 left-1/2 -translate-x-1/2 w-full max-w-md px-6 z-[70]">
+            <div className="flex items-center gap-2 bg-[#003b25] text-white rounded-lg px-4 py-3 text-sm font-medium shadow-lg">
+              {toast}
+            </div>
+          </div>
+        )}
+      </>
     );
   }
 
@@ -126,13 +220,13 @@ export const SettingsArea: React.FC<SettingsAreaProps> = ({
         <div className="flex-1 flex flex-col justify-end text-[#0e0f11] min-w-0">
           <p className="text-[14px] leading-[22px]">Hello,</p>
           <p className="text-[20px] font-semibold leading-[28px] truncate">
-            {mockUser.name}
+            {user.name}
           </p>
         </div>
         <div className="size-[80px] rounded-full overflow-hidden border border-[#e3e5e8] shrink-0">
           <img
-            src={mockUser.avatarUrl}
-            alt={mockUser.name}
+            src={user.avatarUrl}
+            alt={user.name}
             className="size-full object-cover"
           />
         </div>

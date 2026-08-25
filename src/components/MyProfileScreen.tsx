@@ -5,22 +5,45 @@ import { MockUser } from "../data/user";
 interface MyProfileScreenProps {
   user: MockUser;
   onBack: () => void;
+  onEditName: () => void;
+  onEditPhone: () => void;
+  onEditAddress: () => void;
+  onEditCallPreferences: () => void;
 }
 
 interface ProfileRow {
   label: string;
   value: string;
+  onClick?: () => void;
 }
+
+const CALL_PREFERENCE_LABEL: Record<MockUser["callPreference"], string> = {
+  call: "Service provider can call and see my number",
+  "message-only": "Send quotes via email only",
+};
 
 export const MyProfileScreen: React.FC<MyProfileScreenProps> = ({
   user,
   onBack,
+  onEditName,
+  onEditPhone,
+  onEditAddress,
+  onEditCallPreferences,
 }) => {
   const rows: ProfileRow[] = [
-    { label: "Name and surname", value: user.name },
+    { label: "Name and surname", value: user.name, onClick: onEditName },
     { label: "Email", value: user.email },
-    { label: "Mobile number", value: user.phone },
-    { label: "Location preferences", value: user.location },
+    {
+      label: "Mobile number",
+      value: `${user.countryCode} ${user.phone}`,
+      onClick: onEditPhone,
+    },
+    { label: "Location preferences", value: user.location, onClick: onEditAddress },
+    {
+      label: "Call preferences",
+      value: CALL_PREFERENCE_LABEL[user.callPreference],
+      onClick: onEditCallPreferences,
+    },
   ];
 
   return (
@@ -49,7 +72,7 @@ export const MyProfileScreen: React.FC<MyProfileScreenProps> = ({
           <React.Fragment key={row.label}>
             <button
               type="button"
-              onClick={() => console.log(`Edit ${row.label}`)}
+              onClick={row.onClick ?? (() => console.log(`Edit ${row.label}`))}
               className="flex items-center gap-2 px-6 py-4 text-left w-full"
             >
               <div className="flex-1 flex flex-col gap-1 min-w-0">

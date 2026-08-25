@@ -1,0 +1,125 @@
+import React, { useState } from "react";
+import { Header } from "./FormHeader";
+import { CTA } from "./CTA";
+import { UserAddress } from "../data/user";
+
+interface AddressEditScreenProps {
+  address: UserAddress;
+  onSave: (address: UserAddress) => void;
+  onBack: () => void;
+}
+
+interface AddressFieldProps {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+}
+
+const AddressField: React.FC<AddressFieldProps> = ({ label, value, onChange }) => (
+  <div className="flex flex-col gap-1">
+    <label className="text-base font-semibold text-[#0e0f11]">{label}</label>
+    <div className="relative">
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full h-14 pl-4 pr-10 border border-[#b8c0ca] rounded-lg text-base text-[#0e0f11] focus:outline-none"
+      />
+      {value.length > 0 && (
+        <button
+          type="button"
+          onClick={() => onChange("")}
+          aria-label={`Clear ${label}`}
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-[#6a7482]"
+        >
+          ✕
+        </button>
+      )}
+    </div>
+  </div>
+);
+
+export const AddressEditScreen: React.FC<AddressEditScreenProps> = ({
+  address,
+  onSave,
+  onBack,
+}) => {
+  const [city, setCity] = useState(address.city);
+  const [district, setDistrict] = useState(address.district);
+  const [neighborhood, setNeighborhood] = useState(address.neighborhood);
+  const [locationDenied, setLocationDenied] = useState(false);
+
+  const isValid = city.trim().length > 0 && district.trim().length > 0;
+
+  const handleUseMyLocation = () => {
+    if (!navigator.geolocation) {
+      setLocationDenied(true);
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      () => {
+        // Prototype: no real geocoding API — resolve to the mock user's own city.
+        setLocationDenied(false);
+        setCity("Milan");
+        setDistrict("Milan");
+        setNeighborhood("Milan");
+      },
+      () => setLocationDenied(true)
+    );
+  };
+
+  const handleSave = () => {
+    if (!isValid) return;
+    onSave({ city: city.trim(), district: district.trim(), neighborhood: neighborhood.trim() });
+  };
+
+  return (
+    <div className="flex flex-col min-h-screen w-full max-w-md mx-auto bg-white relative">
+      <Header title="Address" onBackClick={onBack} showCloseButton={false} />
+
+      <div className="flex flex-col flex-grow pb-28">
+        <div className="px-6 pt-6 pb-4 flex flex-col gap-2">
+          <h2 className="text-xl font-semibold text-[#0e0f11] leading-7">
+            Your location
+          </h2>
+          <p className="text-sm text-[#6a7482]">
+            Use the location button to autofill your address or manually
+            select it below. Changes won't affect your active requests but
+            will apply to new requests.
+          </p>
+        </div>
+
+        <div className="px-6 flex flex-col gap-5">
+          <button
+            type="button"
+            onClick={handleUseMyLocation}
+            className="w-full flex items-center justify-center gap-2 bg-[#e8f0fe] text-[#0b57d0] font-semibold rounded-lg px-4 py-3"
+          >
+            <img src="/icons/LocationPin.svg" alt="" className="w-4 h-4" />
+            Use my location
+          </button>
+
+          <AddressField label="City" value={city} onChange={setCity} />
+          <AddressField label="District" value={district} onChange={setDistrict} />
+          <AddressField label="Neighborhood" value={neighborhood} onChange={setNeighborhood} />
+
+          {locationDenied && (
+            <div className="bg-[#fdecea] rounded-lg p-3 flex flex-col gap-1">
+              <p className="text-sm font-semibold text-[#e1590e]">
+                Location access denied
+              </p>
+              <p className="text-sm text-[#e1590e]">
+                You didn't provide access to your location. Please check
+                your settings to share it.
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <CTA onClick={handleSave} disabled={!isValid}>
+        Save
+      </CTA>
+    </div>
+  );
+};
