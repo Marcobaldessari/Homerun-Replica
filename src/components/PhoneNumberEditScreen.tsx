@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Header } from "./FormHeader";
 import { CTA } from "./CTA";
+import { OptionPickerSheet } from "./OptionPickerSheet";
 import { PHONE_NUMBERS_IN_USE } from "../data/user";
 
 interface PhoneNumberEditScreenProps {
@@ -23,6 +24,9 @@ const COUNTRIES = [
   { name: "Romania", code: "+40" },
   { name: "Saudi Arabia", code: "+966" },
 ];
+
+const countryOptionLabel = (country: { name: string; code: string }) =>
+  `${country.name}  ${country.code}`;
 
 export const PhoneNumberEditScreen: React.FC<PhoneNumberEditScreenProps> = ({
   countryCode,
@@ -74,19 +78,15 @@ export const PhoneNumberEditScreen: React.FC<PhoneNumberEditScreenProps> = ({
           </p>
         </div>
 
-        <div className="px-6 flex flex-col gap-1 relative">
+        <div className="px-6 flex flex-col gap-1">
           <div className="flex gap-3">
             <button
               type="button"
-              onClick={() => setPickerOpen((open) => !open)}
+              onClick={() => setPickerOpen(true)}
               className="w-[110px] h-14 flex items-center justify-between px-3 border border-[#b8c0ca] rounded-lg shrink-0"
             >
               <span className="text-base text-[#292d33]">{selectedCode}</span>
-              <img
-                src="/icons/ChevronDown.svg"
-                alt=""
-                className={`w-3 h-[7px] transition-transform ${pickerOpen ? "rotate-180" : ""}`}
-              />
+              <img src="/icons/ChevronDown.svg" alt="" className="w-3 h-[7px]" />
             </button>
             <input
               type="tel"
@@ -101,29 +101,6 @@ export const PhoneNumberEditScreen: React.FC<PhoneNumberEditScreenProps> = ({
             />
           </div>
 
-          {pickerOpen && (
-            <div className="absolute top-16 left-0 z-20 w-[220px] max-h-64 overflow-y-auto bg-white border border-[#e3e5e8] rounded-lg shadow-lg py-2">
-              {COUNTRIES.map((country) => (
-                <button
-                  key={country.code}
-                  type="button"
-                  onClick={() => {
-                    setSelectedCode(country.code);
-                    setPickerOpen(false);
-                  }}
-                  className={`w-full text-left px-4 py-2 text-sm flex items-center justify-between ${
-                    country.code === selectedCode
-                      ? "font-semibold text-[#0e0f11]"
-                      : "text-[#292d33]"
-                  }`}
-                >
-                  <span>{country.name}</span>
-                  <span>{country.code}</span>
-                </button>
-              ))}
-            </div>
-          )}
-
           {errorMessage && (
             <p className="text-sm text-[#e1590e] flex items-start gap-1 mt-2">
               <img src="/icons/AlertCircleFull.svg" alt="" className="w-4 h-4 mt-0.5 shrink-0" />
@@ -136,6 +113,22 @@ export const PhoneNumberEditScreen: React.FC<PhoneNumberEditScreenProps> = ({
       <CTA onClick={handleSave} disabled={touched && !isValid}>
         Save
       </CTA>
+
+      {pickerOpen && (
+        <OptionPickerSheet
+          title="Choose a country"
+          options={COUNTRIES.map(countryOptionLabel)}
+          selected={countryOptionLabel(
+            COUNTRIES.find((c) => c.code === selectedCode) ?? COUNTRIES[0]
+          )}
+          onSelect={(label) => {
+            const country = COUNTRIES.find((c) => countryOptionLabel(c) === label);
+            if (country) setSelectedCode(country.code);
+            setPickerOpen(false);
+          }}
+          onClose={() => setPickerOpen(false)}
+        />
+      )}
     </div>
   );
 };

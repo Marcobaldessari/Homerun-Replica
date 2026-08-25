@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Header } from "./FormHeader";
 import { CTA } from "./CTA";
+import { OptionPickerSheet } from "./OptionPickerSheet";
 import { UserAddress } from "../data/user";
 
 interface AddressEditScreenProps {
@@ -9,33 +10,59 @@ interface AddressEditScreenProps {
   onBack: () => void;
 }
 
-interface AddressFieldProps {
+type PickerField = "city" | "district" | "neighborhood" | null;
+
+// Mock geo hierarchy — this prototype has no real geocoding/places API, so
+// each level's options are keyed off the parent level actually selected.
+const CITIES = ["Milan", "Rome", "Turin", "Naples", "Bologna", "Florence"];
+
+const DISTRICTS_BY_CITY: Record<string, string[]> = {
+  Milan: ["Milan", "Sesto San Giovanni", "Monza"],
+  Rome: ["Rome", "Fiumicino", "Guidonia Montecelio"],
+  Turin: ["Turin", "Moncalieri", "Collegno"],
+  Naples: ["Naples", "Pozzuoli", "Casoria"],
+  Bologna: ["Bologna", "Casalecchio di Reno", "Imola"],
+  Florence: ["Florence", "Fiesole", "Scandicci"],
+};
+
+const NEIGHBORHOODS_BY_DISTRICT: Record<string, string[]> = {
+  Milan: ["Brera", "Navigli", "Isola"],
+  "Sesto San Giovanni": ["Centro", "Rondò"],
+  Monza: ["Centro", "San Fruttuoso"],
+  Rome: ["Trastevere", "Monti", "EUR"],
+  Fiumicino: ["Centro", "Isola Sacra"],
+  "Guidonia Montecelio": ["Guidonia", "Montecelio"],
+  Turin: ["Centro", "San Salvario", "Crocetta"],
+  Moncalieri: ["Centro", "Borgo San Pietro"],
+  Collegno: ["Centro", "Leumann"],
+  Naples: ["Vomero", "Chiaia", "Centro Storico"],
+  Pozzuoli: ["Centro", "Arco Felice"],
+  Casoria: ["Centro"],
+  Bologna: ["Centro", "Santo Stefano", "Navile"],
+  "Casalecchio di Reno": ["Centro"],
+  Imola: ["Centro"],
+  Florence: ["Centro Storico", "Oltrarno", "Campo di Marte"],
+  Fiesole: ["Centro"],
+  Scandicci: ["Centro"],
+};
+
+interface AddressPickerRowProps {
   label: string;
   value: string;
-  onChange: (value: string) => void;
+  onOpen: () => void;
 }
 
-const AddressField: React.FC<AddressFieldProps> = ({ label, value, onChange }) => (
+const AddressPickerRow: React.FC<AddressPickerRowProps> = ({ label, value, onOpen }) => (
   <div className="flex flex-col gap-1">
     <label className="text-base font-semibold text-[#0e0f11]">{label}</label>
-    <div className="relative">
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-full h-14 pl-4 pr-10 border border-[#b8c0ca] rounded-lg text-base text-[#0e0f11] focus:outline-none"
-      />
-      {value.length > 0 && (
-        <button
-          type="button"
-          onClick={() => onChange("")}
-          aria-label={`Clear ${label}`}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-[#6a7482]"
-        >
-          ✕
-        </button>
-      )}
-    </div>
+    <button
+      type="button"
+      onClick={onOpen}
+      className="w-full h-14 flex items-center justify-between px-4 border border-[#b8c0ca] rounded-lg text-left"
+    >
+      <span className="text-base text-[#0e0f11] truncate">{value}</span>
+      <img src="/icons/ChevronDown.svg" alt="" className="w-3 h-[7px] shrink-0" />
+    </button>
   </div>
 );
 
@@ -48,6 +75,11 @@ export const AddressEditScreen: React.FC<AddressEditScreenProps> = ({
   const [district, setDistrict] = useState(address.district);
   const [neighborhood, setNeighborhood] = useState(address.neighborhood);
   const [locationDenied, setLocationDenied] = useState(false);
+  const [openPicker, setOpenPicker] = useState<PickerField>(null);
+
+  const districtOptions = DISTRICTS_BY_CITY[city] ?? [district].filter(Boolean);
+  const neighborhoodOptions =
+    NEIGHBORHOODS_BY_DISTRICT[district] ?? [neighborhood].filter(Boolean);
 
   const isValid = city.trim().length > 0 && district.trim().length > 0;
 
@@ -66,6 +98,25 @@ export const AddressEditScreen: React.FC<AddressEditScreenProps> = ({
       },
       () => setLocationDenied(true)
     );
+  };
+
+  const handleSelectCity = (value: string) => {
+    setCity(value);
+    const firstDistrict = DISTRICTS_BY_CITY[value]?.[0] ?? "";
+    setDistrict(firstDistrict);
+    setNeighborhood(NEIGHBORHOODS_BY_DISTRICT[firstDistrict]?.[0] ?? "");
+    setOpenPicker(null);
+  };
+
+  const handleSelectDistrict = (value: string) => {
+    setDistrict(value);
+    setNeighborhood(NEIGHBORHOODS_BY_DISTRICT[value]?.[0] ?? "");
+    setOpenPicker(null);
+  };
+
+  const handleSelectNeighborhood = (value: string) => {
+    setNeighborhood(value);
+    setOpenPicker(null);
   };
 
   const handleSave = () => {
@@ -99,9 +150,17 @@ export const AddressEditScreen: React.FC<AddressEditScreenProps> = ({
             Use my location
           </button>
 
-          <AddressField label="City" value={city} onChange={setCity} />
-          <AddressField label="District" value={district} onChange={setDistrict} />
-          <AddressField label="Neighborhood" value={neighborhood} onChange={setNeighborhood} />
+          <AddressPickerRow label="City" value={city} onOpen={() => setOpenPicker("city")} />
+          <AddressPickerRow
+            label="District"
+            value={district}
+            onOpen={() => setOpenPicker("district")}
+          />
+          <AddressPickerRow
+            label="Neighborhood"
+            value={neighborhood}
+            onOpen={() => setOpenPicker("neighborhood")}
+          />
 
           {locationDenied && (
             <div className="bg-[#fdecea] rounded-lg p-3 flex flex-col gap-1">
@@ -120,6 +179,34 @@ export const AddressEditScreen: React.FC<AddressEditScreenProps> = ({
       <CTA onClick={handleSave} disabled={!isValid}>
         Save
       </CTA>
+
+      {openPicker === "city" && (
+        <OptionPickerSheet
+          title="Choose a city"
+          options={CITIES}
+          selected={city}
+          onSelect={handleSelectCity}
+          onClose={() => setOpenPicker(null)}
+        />
+      )}
+      {openPicker === "district" && (
+        <OptionPickerSheet
+          title="Choose a district"
+          options={districtOptions}
+          selected={district}
+          onSelect={handleSelectDistrict}
+          onClose={() => setOpenPicker(null)}
+        />
+      )}
+      {openPicker === "neighborhood" && (
+        <OptionPickerSheet
+          title="Choose a neighborhood"
+          options={neighborhoodOptions}
+          selected={neighborhood}
+          onSelect={handleSelectNeighborhood}
+          onClose={() => setOpenPicker(null)}
+        />
+      )}
     </div>
   );
 };
