@@ -1,5 +1,5 @@
 {
-  "name": "homerun-replica",
+  "name": "homerun-replica-consumer",
   "version": "0.0.1",
   "private": true,
   "type": "module",

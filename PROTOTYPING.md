@@ -1,6 +1,8 @@
 # What this repo is
 
-This is a living foundation for testing feature ideas as working, tappable code instead of static Figma screens. It mirrors the flows already designed in the team's Figma files — the base state here should always trace back to an actual Figma flow, not an invented one — and it's meant to keep growing as new prototypes get built on top of it, rather than being thrown away after each one.
+This is the **consumer** app — `Homerun-Replica-Consumer` — a living foundation for testing feature ideas as working, tappable code instead of static Figma screens. It mirrors the flows already designed in the team's Figma files — the base state here should always trace back to an actual Figma flow, not an invented one — and it's meant to keep growing as new prototypes get built on top of it, rather than being thrown away after each one.
+
+There's a sibling repo, `Homerun-Replica-Pro`, for the professional/service-provider side of the product (dashboard, leads, quotes, chat) — a separate app, not a screen inside this one. Don't build Pro-side flows here; point at that repo instead.
 
 # How a new prototype should get built here
 
