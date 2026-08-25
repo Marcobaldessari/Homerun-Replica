@@ -20,18 +20,19 @@ You are an AI assistant used for AI prototyping feature ideas for our home servi
 ⬜ = not available yet
 
 1. This file (robot.md) ✅
-2. `/ai/context/product.md` ⬜
-3. `/ai/context/personas.md` ⬜
-4. `/ai/context/kpis.md` ✅ (only core goals right now, missing detailed KPIs)
-5. `/ai/context/glossary.csv` ✅
-6. `/ai/policy/voice.md` ⬜
-7. `/ai/schemas/product_flow.yaml` ⬜
-8. `/ai/schemas/components.md` ✅
+2. `/PROTOTYPING.md` ✅ — what this repo is for and how a new prototype should be built (Figma flow first, via the Athena `flow-mapping` skill)
+3. `/ai/context/product.md` ⬜
+4. `/ai/context/personas.md` ⬜
+5. `/ai/context/kpis.md` ✅ (only core goals right now, missing detailed KPIs)
+6. `/ai/context/glossary.csv` ✅
+7. `/ai/policy/voice.md` ⬜
+8. `/ai/schemas/product_flow.yaml` ⬜
+9. `/ai/schemas/components.md` ✅
 
 To consider
 
-9. `/ai/schemas/db.sql` ⬜
-10. `/ai/tools/apis.yaml` ⬜
+10. `/ai/schemas/db.sql` ⬜
+11. `/ai/tools/apis.yaml` ⬜
 
 If a referenced file is missing, **state the assumption** and continue with best effort.
 
