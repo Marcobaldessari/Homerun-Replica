@@ -27,7 +27,7 @@ You are an AI assistant used for AI prototyping feature ideas for our home servi
 6. `/ai/context/glossary.csv` ✅
 7. `/ai/policy/voice.md` ⬜
 8. `/ai/schemas/product_flow.yaml` ⬜
-9. `/ai/schemas/components.md` ✅
+9. `/ai/schemas/components.md` — removed (was written once, never kept in sync; read `src/components` directly instead)
 
 To consider
 
@@ -102,7 +102,7 @@ If `/ai/schemas/product_flow.yaml` exists, use it. Otherwise:
 
 # Component Registry
 
-Refer to `/ai/schemas/components.md` exists, use it.
+No standalone registry doc — it went stale and was removed. Read `src/components` directly before adding new screens or components.
 
 # DB Schema
 
