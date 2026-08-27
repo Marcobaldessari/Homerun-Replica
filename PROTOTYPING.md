@@ -21,3 +21,7 @@ Partial (screen/entry point exists but the core action is a no-op): phone verifi
 Not yet started: pro pages (viewing a pro's profile), authentication checks (no app-wide signed-in gate), rate the app, download app banner, settings > data & privacy, settings > others (suggest a friend / support / contact us), notification page, register as pro, and the Stripe/payment flow (existing `CheckoutPage`/`CreditCardForm`/`PaymentInfoCard` are orphaned pre-Figma-rebuild code, not wired to anything).
 
 Check the Asana card before starting new work in these areas — it has the up-to-date status per flow.
+
+# Keeping FIGMA_LINKS.md honest
+
+A monthly automated routine re-reads every flow linked in `FIGMA_LINKS.md` and flags when Figma has gained a screen this repo doesn't know about yet — see `figma-flows/README.md` for how it works and where its output lands.
