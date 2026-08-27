@@ -11,3 +11,7 @@ There's a sibling repo, `Homerun-Replica-Pro`, for the professional/service-prov
 3. **Keep the diff scoped to the flow being tested.** This repo is a prototyping sandbox, not a production app — build the smallest version that makes the flow real and tappable, and say plainly what's out of scope rather than quietly polishing unrelated corners.
 
 If you're driving this from outside the repo (e.g. from an Athena session elsewhere), the Athena `prototype` skill handles finding/cloning this repo and branching per feature — see that skill for the checkout and branch conventions. `robot.md` still governs tone, guardrails, and the rest of the AI context for anyone working directly in this repo.
+
+# Keeping FIGMA_LINKS.md honest
+
+A monthly automated routine re-reads every flow linked in `FIGMA_LINKS.md` and flags when Figma has gained a screen this repo doesn't know about yet — see `figma-flows/README.md` for how it works and where its output lands.
